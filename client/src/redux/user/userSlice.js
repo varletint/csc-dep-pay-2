@@ -84,6 +84,9 @@ export const {
   deleteUserFailure,
   deleteUserSuccess,
   signoutSuccess,
+  addItemStart,
+  addItemSuccess,
+  addItemFailure,
   clearError,
 } = userSlice.actions;
 

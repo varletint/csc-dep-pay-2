@@ -1,25 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { HiThumbUp } from "react-icons/hi";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addItemSuccess,
+  addItemFailure,
+  addItemStart,
+  clearError,
+} from "../redux/user/userSlice";
+
+// Note:
+//      Browserslist: browsers data( caniuse - lite ) is 35 months old.Please run:
+//    npx update-browserslist-db@latest
 
 export default function CreateItem({ close }) {
   const [formData, setFormData] = useState({});
   const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadErrorMessage, setLoadErrorMessage] = useState(null);
+  const { error: errorMessage, loading: isLoad } = useSelector(
+    (state) => state.user
+  );
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
+
+  useEffect(() => {
+    dispatch(clearError());
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const { price, itemName, category } = formData;
 
-    // if (!price || !itemName || !category) console.log("Fields cant be empty");
+    if (!price || !itemName || !category) {
+      setLoadErrorMessage("All field are required");
+      return dispatch(addItemFailure("All fields are required"));
+    }
 
     try {
+      dispatch(addItemStart());
       const res = await fetch("/api/item/create-item", {
         method: "POST",
         headers: {
@@ -30,23 +55,27 @@ export default function CreateItem({ close }) {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.message);
+        setIsLoading(false);
+        setLoadErrorMessage(data.message);
+        return dispatch(addItemFailure(data.message));
       }
+      setIsLoading(false);
       if (data.success === false) {
-        alert(data.message);
+        setLoadErrorMessage(data.message);
+        return dispatch(addItemFailure(data.message));
       }
       if (res.ok) {
         setShowModal(true);
         setTimeout(() => {
           setShowModal(false);
-        }, 5001);
+        }, 3000);
 
-        // setShowModal(false);
-        console.log(data.items);
+        dispatch(addItemSuccess(data));
         navigate("/dashboard?tab=profile");
       }
     } catch (error) {
-      console.log(error);
+      setLoadErrorMessage(error.message);
+      dispatch(addItemFailure(error.message));
     }
     // clearTimeout(() => {
     //   setTimeOut;
@@ -67,6 +96,7 @@ export default function CreateItem({ close }) {
             name='itemName'
             id='itemName'
             placeholder='Item Name'
+            // required
             onChange={handleChange}
             className='bg-[#ddebe0] w-full py-3 rounded-lg px-5
             placeholder:text-[#8aa197] shadow font-medium'
@@ -78,6 +108,7 @@ export default function CreateItem({ close }) {
             type='number'
             name='price'
             id='price'
+            // required
             onChange={handleChange}
             placeholder='Price of the Item'
             className='bg-[#ddebe0] w-full py-3 rounded-lg px-5
@@ -98,6 +129,7 @@ export default function CreateItem({ close }) {
             placeholder:text-[#8aa197] shadow font-medium'>
               <select
                 id='category'
+                // required
                 className='w-full bg-transparent outline-none'
                 onChange={(e) =>
                   setFormData({ ...formData, category: e.target.value })
@@ -113,10 +145,19 @@ export default function CreateItem({ close }) {
         <button
           type='submit'
           className='bg-[#3e5a4e]
-           font-medium text-white p-[12px] rounded-lg mt-4'>
-          Add Item
+           font-medium text-white p-[12px] rounded-lg mt-4
+           disabled:bg-[#3e5a4e]/80'
+          disabled={isLoad}>
+          {isLoad ? "Adding item..." : "Add item"}
         </button>
       </form>
+
+      {errorMessage && (
+        <p className='mt-3 text-red-500 font-medium text-center'>
+          {errorMessage}
+        </p>
+      )}
+
       <div
         className='  
         '>
