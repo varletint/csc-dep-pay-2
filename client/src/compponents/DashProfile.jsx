@@ -22,6 +22,7 @@ export default function DashProfile() {
   // console.log(PaymentData);
 
   const payWithPaystack = () => {
+    setShowModal(!showModal);
     const popup = new Paystack();
 
     popup.newTransaction({

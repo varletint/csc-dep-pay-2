@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function PaymentModal({ open, children, onClose }) {
   const modal = document.querySelector("modal");
-  console.log({ onClose });
+  // console.log({ onClose });
 
   if (!open) {
     return null;

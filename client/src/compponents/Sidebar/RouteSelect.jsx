@@ -121,7 +121,7 @@ export default function RouteSelect() {
                   -rotate-45 -translate-y-[0.rem]'></span>
                 </button>
               </div>
-              <CreateItem />
+              <CreateItem close />
 
               {/* <PaymentModal></PaymentModal> */}
             </motion.div>
@@ -132,7 +132,7 @@ export default function RouteSelect() {
 
       {isOpen && (
         <div
-          className='fixed  inset-0 bg-[#111] opacity-30 z-[100]'
+          className='fixed  inset-0 bg-[#111] opacity-85 z-[100]'
           onClick={() => setIsOpen(false)}
         />
       )}

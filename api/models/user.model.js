@@ -28,6 +28,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    fullName: {
+      type: String,
+      required,
+    },
   },
   {
     timestamps: true,

@@ -3,28 +3,41 @@ import { buildItemQuery } from "../utils/queryBuilder.js";
 import Item from "../models/item.modal.js";
 
 export const createItem = async (req, res, next) => {
-  const priceTag = req.body.priceTag;
-  const itemName = req.body.itemName;
-  const category = req.body.category;
+  // const priceTag = req.body.priceTag;
+  // const itemName = req.body.itemName;
+  // const category = req.body.category;
+  // if()
+  // if (!itemName || !priceTag || !category) {
+  //   next(errorHandler(400, "All field are required ba"));
+  // }
+  // const tempSlug = req.body.itemName + req.body.priceTag;
+  // const validSlug = tempSlug
+  //   .split(" ")
+  //   .join("-")
+  //   .toLowerCase()
+  //   .replace(/[^a-zA-Z0-9-]/g, "");
+  // const newItem = new Item({
+  //   ...req.body,
+  //   slug: validSlug,
+  //   userId: "001",
+  // });
+  // try {
+  //   const savedItem = await newItem.save();
+  //   res.status(200).json(savedItem);
+  // } catch (error) {
+  //   next(error);
 
-  if (!itemName || !priceTag || !category) {
-    next(errorHandler(400, "All field are required ba"));
-  }
+  // }
 
-  const tempSlug = req.body.itemName + req.body.priceTag;
-
-  const validSlug = tempSlug
-    .split(" ")
-    .join("-")
-    .toLowerCase()
-    .replace(/[^a-zA-Z0-9-]/g, "");
+  const { price, itemName, category } = req.boby;
+  if (!price || itemName || category)
+    next(errorHandler(400, "All field are required"));
 
   const newItem = new Item({
-    ...req.body,
-    slug: validSlug,
-    userId: "001",
+    price,
+    itemName,
+    category,
   });
-
   try {
     const savedItem = await newItem.save();
     res.status(200).json(savedItem);
