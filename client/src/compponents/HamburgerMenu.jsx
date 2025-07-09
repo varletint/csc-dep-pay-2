@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const HamburgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,9 +57,9 @@ const HamburgerMenu = () => {
           <a href='#contact' className=''>
             Contact
           </a>
-          <a href='/dashboard' className=''>
+          <Link to='/dashboard' className=''>
             Dashboard
-          </a>
+          </Link>
         </nav>
       </motion.div>
 
