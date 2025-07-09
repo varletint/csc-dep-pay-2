@@ -10,7 +10,7 @@ import {
 import { HiArrowLeft, HiOutlineViewBoards } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import CreateItem from "../createItem";
+import CreateItem from "../CreateItem";
 
 export default function RouteSelect() {
   const [isOpen, setIsOpen] = useState(false);
