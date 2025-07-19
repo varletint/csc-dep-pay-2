@@ -4,12 +4,13 @@ import { Button } from "./GeneratePaymentDetails";
 
 export default function TransanctionVerification() {
   const referenceSlug = useParams();
+  const [paymentDataFor, setPaymentDataFor] = useState([]);
   // const [matric_no, setMatricNo] = useState("u17/fns/css/1129");
   const [formData, setFormData] = useState({
     refrence: referenceSlug.reference,
   });
   // const [fullname, setFullname] = useState("");
-  const [paymentData, setPaymentData] = useState([]);
+  const [paymentData, setPaymentData] = useState({});
   const [paymentAmount, setPaymentAmount] = useState("");
   const [items, setItems] = useState([]);
   const [error, setError] = useState(null);
@@ -18,7 +19,7 @@ export default function TransanctionVerification() {
   const namount = Number(amount);
 
   console.log(formData);
-  console.log(namount);
+  console.log(paymentDataFor);
 
   useEffect(() => {
     const fetchReferenceDetails = async () => {
@@ -54,15 +55,19 @@ export default function TransanctionVerification() {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const res = await fetch(`/api/item/getItems?priceTag=${namount}`);
+        const res = await fetch(
+          `/api/item/getItems?priceTag=${Number(amount)}`
+        );
         const data = await res.json();
-        console.log(data.items);
+        if (res.ok) {
+          setPaymentDataFor(data.items);
+        }
       } catch (error) {
         console.log(error);
       }
     };
     fetchItems();
-  });
+  }, []);
 
   const loadFormData = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -80,7 +85,7 @@ export default function TransanctionVerification() {
           <p
             className='px-1.5 py-0.5 bg-[#adeec8f3] text-[#038329]
           rounded font-bold'>
-            ₦{(paymentData.amount / 100).toFixed(2)}
+            ₦{(paymentData.amount / 100).toFixed(0)}
           </p>
         </div>
         <div className=' flex flex-col gap-1.5'>
@@ -121,11 +126,19 @@ export default function TransanctionVerification() {
             name=''
             id=''
             className=' border-none bg-transparent
-          focus:outline-none font-semibold text-[#45524c]'>
+          focus:outline-none font-semibold text-[#45524c] w-full'>
             <option className=''> Payment for</option>
-            <option> Manual for CSC110</option>
-            <option> Manual for CSC213</option>
-            <option> Manual for CSC213</option>
+
+            {paymentDataFor.length > 0 &&
+              paymentDataFor.map((item) =>
+                item ? (
+                  <option key={item._id}>{item.itemName}</option>
+                ) : (
+                  <option key={"no item"} disabled>
+                    No item for this Amount
+                  </option>
+                )
+              )}
           </select>
         </div>
         <div className=''></div>

@@ -11,6 +11,7 @@ import { HiArrowLeft, HiOutlineViewBoards } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import CreateItem from "../CreateItem";
+import PaymentModal from "../PaymentModal";
 
 export default function RouteSelect() {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,33 +36,45 @@ export default function RouteSelect() {
         {/* </Link> */}
       </div>
       {isOpen ? (
-        <AnimatePresence
-          initial={true}
-          // className='fixed left-[50%] top-1/2 -translate-x-1/2 -translate-y-1/2    inset-0 '>
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0 }}>
-            <div
-              className='fixed left-[50%] top-1/2   inset-0 
+        // <AnimatePresence
+        //   initial={true}
+        //   className='fixed left-[50%] top-1/2 -translate-x-1/2 -translate-y-1/2    inset-0 '>
+        // >
+        //   <motion.div
+        //     initial={{ opacity: 0, scale: 0 }}
+        //     animate={{ opacity: 1, scale: 1 }}
+        //     exit={{ opacity: 0, scale: 0 }}>
+        <div
+          className='fixed left-[50%] top-1/2   inset-0 
           bg-white z-[1000] w-[350px] py-[rem] h-[500px] sm:w-[500px]
           -translate-x-1/2 -translate-y-1/2 p-4 rounded-2xl
           '>
-              <div
-                className='  py-3 flex justify-end
+          <div
+            className='  py-3 flex justify-end
             '>
-                <FaTimes
+            {/* <FaTimes
                   size={25}
                   className=''
                   onClick={() => setIsOpen(false)}
-                />
-              </div>
-              <CreateItem />
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      ) : null}
+                /> */}
+            <button
+              className=' flex flex-col justify-center items-center
+                space-y-1 px-2'
+              onClick={() => setIsOpen(!open)}>
+              <span
+                className=' block bg-black h-0.5 w-5 z-
+                   rotate-45 translate-y-1.5'></span>
+              <span
+                className=' block bg-black h-0.5 w-5 z- 
+                  -rotate-45 -translate-y-[0.rem]'></span>
+            </button>
+          </div>
+          {/* <CreateItem /> */}
+          <PaymentModal>y</PaymentModal>
+        </div>
+      ) : // {/* </motion.div>
+      // </AnimatePresence> */}
+      null}
 
       {isOpen && (
         <div
