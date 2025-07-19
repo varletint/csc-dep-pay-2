@@ -25,3 +25,4 @@ vue.vue
 *.sln
 *.sw?
 client/src/Pages/Vue1.html
+client/src/Pages/vue.vue
