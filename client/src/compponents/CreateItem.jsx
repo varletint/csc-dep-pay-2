@@ -2,7 +2,7 @@ import React from "react";
 
 export default function CreateItem() {
   return (
-    <div className=' flex flex-col'>
+    <div className=' flex flex-col z-[101]'>
       <h1
         className='text-center text-2xl font-medium
       sm:text-3xl sm:font-semibold text-[#04663b] '>

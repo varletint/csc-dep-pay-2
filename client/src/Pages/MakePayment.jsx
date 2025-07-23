@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function MakePayment({ onClose }) {
   const [paymentDetails, setPaymentDetails] = useState("");
@@ -66,11 +67,17 @@ export default function MakePayment({ onClose }) {
   };
 
   return (
-    <div
+    <motion.div
       className='  max-w-[30rem] min-h-[90vh] 
       m-auto flex  justify-center
       items-center flex-col
-      '>
+      '
+      initial={{ width: 0 }}
+      animate={{ width: "", transition: { duration: 0.2 } }}
+      exit={{
+        x: window.innerWidth,
+        transition: { duration: 9 },
+      }}>
       <div
         className=' bg-[#fff] w-full  py-12 px-4
       sm:rounded-[1rem] shadow-md'>
@@ -150,6 +157,6 @@ export default function MakePayment({ onClose }) {
           </div>
         </form>
       </div>
-    </div>
+    </motion.div>
   );
 }

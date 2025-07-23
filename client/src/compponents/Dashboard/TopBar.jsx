@@ -7,7 +7,7 @@ export default function TopBar() {
   return (
     <div
       className=' border-b px-4 mb-4 mt-1
-  pb-4 border-[#f1f7f3]'>
+  pb-4 border-[#f1f7f3]  py-4'>
       <div className=' sm:flex block font-semibold  justify-between items-center'>
         <div className=''>
           <span className=' font-semibold text-sm block'>

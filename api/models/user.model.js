@@ -20,6 +20,14 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    isStudent: {
+      type: Boolean,
+      default: false,
+    },
+    matricNumber: {
+      type: String,
+      required: false,
+    },
   },
   {
     timestamps: true,

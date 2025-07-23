@@ -13,9 +13,12 @@ export default function PaymentModal({ open, children, onClose }) {
     <motion.div
       className=' z-[100]  modal popup
       min-h-screen w-full transition-all duration-200 ease-in-out  bg-red-500'
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0, transition: { duration: 2 } }}>
+      initial={{ height: 1 }}
+      animate={{ height: "100%" }}
+      exit={{
+        x: window.innerWidth,
+        transition: { duration: 9 },
+      }}>
       {children}
     </motion.div>,
     document.getElementById("portal")

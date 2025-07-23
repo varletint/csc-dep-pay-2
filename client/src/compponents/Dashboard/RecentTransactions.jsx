@@ -1,8 +1,6 @@
 import React from "react";
 
 export default function RecentTransactions() {
-  const date = new Date();
-  console.log(date);
   return (
     <div
       className='grid-cols-1 p-4 border 

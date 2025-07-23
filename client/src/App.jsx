@@ -15,39 +15,42 @@ import UploadSuccessful from "./Pages/UploadSuccessful";
 import Download from "./Pages/Download";
 import Testing from "./Pages/Testing";
 import Home from "./Pages/Home";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/pay/:price' element={<MakePayment />} />
-          <Route path='/payment-types' element={<TypesOfPayment />} />
-          <Route path='/login' element={<SignIn />} />
-          <Route path='/test' element={<Testing />} />
-          <Route
-            path='/generate-payment-details'
-            element={<GeneratePaymentDetails />}
-          />
-          <Route
-            element={<TransanctionVerification />}
-            path='/verify/:reference'
-          />
-          <Route
-            path='/verify-success/:reference'
-            element={<UploadSuccessful />}
-          />
-          <Route path='/download' element={<Download />} />
-          {/* <Route path='/register' element={<CreateAccount />} /> */}
+      <AnimatePresence>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/pay/:price' element={<MakePayment />} />
+            <Route path='/payment-types' element={<TypesOfPayment />} />
+            <Route path='/login' element={<SignIn />} />
+            <Route path='/test' element={<Testing />} />
+            <Route
+              path='/generate-payment-details'
+              element={<GeneratePaymentDetails />}
+            />
+            <Route
+              element={<TransanctionVerification />}
+              path='/verify/:reference'
+            />
+            <Route
+              path='/verify-success/:reference'
+              element={<UploadSuccessful />}
+            />
+            <Route path='/download' element={<Download />} />
+            {/* <Route path='/register' element={<CreateAccount />} /> */}
 
-          {/* Private Routes */}
-          {/* <Route element={<AdminPrivate />}> */}
-          <Route path='/dashboard' element={<Page />} />
-          <Route path='/create-item' element={<CreateItem />} />
-          {/* </Route> */}
-        </Routes>
-      </BrowserRouter>
+            {/* Private Routes */}
+            {/* <Route element={<AdminPrivate />}> */}
+            <Route path='/dashboard' element={<Page />} />
+            <Route path='/create-item' element={<CreateItem />} />
+            {/* </Route> */}
+          </Routes>
+        </BrowserRouter>
+      </AnimatePresence>
     </>
   );
 }
