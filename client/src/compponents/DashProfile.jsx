@@ -124,20 +124,22 @@ export default function DashProfile() {
 
             <div className=' flex  justify-center gap-4'>
               <button
-                className=' bg-green-600 p-3 font-semibold rounded-lg
-                text-white
+                className=' bg-green-600/90 p-3 font-semibold rounded-lg
+                text-white shadow hover:bg-green-600/100
+                transition-[boxshadow,_background-color_color]
               '>
                 Yes, i'm sure
               </button>
-              {/* <button
+              <button
                 className='p-3 px-5 font-semibold rounded-lg
                 text-green-800
-                bg-green-400/40'
+                bg-green-400/40 shadow hover:bg-green-400/50
+                transition-[boxshadow,_background-color_color]'
                 onClick={() => {
                   setShowModal(false);
                 }}>
                 Cancel
-              </button> */}
+              </button>
             </div>
           </div>
         </motion.form>
