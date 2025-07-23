@@ -10,7 +10,8 @@ export default function DashProfile() {
     email: "adam@gmail.com",
     matricNumber: "U22/fns/csc/2131",
   };
-  const [amount, setAmount] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  // const [amount, setAmount] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [PaymentData, setPaymentData] = useState({
     email: currentUser.matricNumber,
@@ -24,11 +25,13 @@ export default function DashProfile() {
   // };
 
   const handleSubmit = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
 
     if (!PaymentData.amount) return;
 
     try {
+      setIsLoading(true);
       const response = await fetch(
         "https://api.paystack.co/transaction/initialize",
         {
@@ -53,13 +56,16 @@ export default function DashProfile() {
       if (data.status) {
         // Redirect to Paystack checkout page
         // setPaymentDetails(data.data.authorization_url);
+        setIsLoading(false);
         window.location.href = data.data.authorization_url;
         // console.log(data);
       } else {
-        // setError("Payment initialization failed. Please try again.");
+        setIsLoading(false);
+        console.log("Payment initialization failed. Please try again.");
       }
     } catch (err) {
       // setError("An error occurred. Please try again later.");
+      setIsLoading(false);
       console.error("Payment error:", err);
     }
   };
@@ -127,7 +133,9 @@ export default function DashProfile() {
                 className=' bg-green-600/90 p-3 font-semibold rounded-lg
                 text-white shadow hover:bg-green-600/100
                 transition-[boxshadow,_background-color_color]
-              '>
+                 disabled:bg-green-600/60 disabled:cursor-not-allowed
+              '
+                disabled={isLoading}>
                 Yes, i'm sure
               </button>
               <button
