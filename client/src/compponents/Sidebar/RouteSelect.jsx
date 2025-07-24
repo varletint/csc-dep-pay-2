@@ -70,68 +70,65 @@ export default function RouteSelect() {
         </div>
         {/* </Link> */}
       </div>
-      {isOpen ? (
-        // <AnimatePresence
-        //   initial={true}
-        //   className='fixed left-[50%] top-1/2 -translate-x-1/2 -translate-y-1/2    inset-0 '>
-        // >
-        //   <motion.div
-        //     initial={{ opacity: 0, scale: 0 }}
-        //     animate={{ opacity: 1, scale: 1 }}
-        //     exit={{ opacity: 0, scale: 0 }}>
+      <AnimatePresence initial={false}>
+        {isOpen ? (
+          //   <motion.div
+          //     initial={{ opacity: 0, scale: 0 }}
+          //     animate={{ opacity: 1, scale: 1 }}
+          //     exit={{ opacity: 0, scale: 0 }}>
 
-        <div
-          className='fixed left-[50%] top-1/2   inset- 
+          <div
+            className='fixed left-[50%] top-1/2   inset- 
    z-[1000] ]
   -translate-x-1/2 -translate-y-1/2  '>
-          <motion.div
-            className=' bg-white w-[350px] sm:w-[450px] 
+            <motion.div
+              className=' bg-white w-[350px] sm:w-[450px] 
             px-5 sm:px-10 py-10 rounded-2xl
           '
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0 }}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0 }}
 
-            // initial={{ opacity: 0, height: 0, width: 0 }}
-            // animate={{
-            //   opacity: 1,
-            //   height: "",
-            //   width: "",
-            //   transition: { duration: 0.2 },
-            // }}
-            // exit={{
-            //   height: 0,
-            //   transition: { duration: 0.2 },
-            // }}
-          >
-            <div
-              className='  py-3 flex justify-end
+              // initial={{ opacity: 0, height: 0, width: 0 }}
+              // animate={{
+              //   opacity: 1,
+              //   height: "",
+              //   width: "",
+              //   transition: { duration: 0.2 },
+              // }}
+              // exit={{
+              //   height: 0,
+              //   transition: { duration: 0.2 },
+              // }}
+            >
+              <div
+                className='  py-3 flex justify-end
             '>
-              {/* <FaTimes
+                {/* <FaTimes
                   size={25}
                   className=''
                   onClick={() => setIsOpen(false)}
                 /> */}
-              <button
-                className=' flex flex-col justify-center items-center
+                <button
+                  className=' flex flex-col justify-center items-center
                 space-y-1 px-2'
-                onClick={() => setIsOpen(!open)}>
-                <span
-                  className=' block bg-black h-0.5 w-5 z-
+                  onClick={() => setIsOpen(!open)}>
+                  <span
+                    className=' block bg-black h-0.5 w-5 z-
                    rotate-45 translate-y-1.5'></span>
-                <span
-                  className=' block bg-black h-0.5 w-5 z- 
+                  <span
+                    className=' block bg-black h-0.5 w-5 z- 
                   -rotate-45 -translate-y-[0.rem]'></span>
-              </button>
-            </div>
-            <CreateItem />
+                </button>
+              </div>
+              <CreateItem />
 
-            {/* <PaymentModal></PaymentModal> */}
-          </motion.div>
-        </div>
-      ) : // {/* </motion.div>
-      // </AnimatePresence> */}
-      null}
+              {/* <PaymentModal></PaymentModal> */}
+            </motion.div>
+          </div>
+        ) : // {/* </motion.div>
+        null}
+      </AnimatePresence>
 
       {isOpen && (
         <div

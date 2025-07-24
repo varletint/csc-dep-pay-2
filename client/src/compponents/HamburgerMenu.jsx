@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 const HamburgerMenu = () => {
@@ -27,50 +27,56 @@ const HamburgerMenu = () => {
       </button>
 
       {/* Slide Menu */}
-      <motion.div
-        // initial={{ y: "100%" }}
-        // animate={{ y: isOpen ? "0%" : "100%" }}
-        // className='fixed top-0 right-0 w-64 h-screen bg-white
-        // shadow-lg p-6 flex flex-col space-y-4 z-10'
+      <div
+        className='absolute top-[100%] right-0 
+        '>
+        <AnimatePresence initial={false}>
+          <motion.div
+            // initial={{ y: "100%" }}
+            // animate={{ y: isOpen ? "0%" : "100%" }}
+            // className='fixed top-0 right-0 w-64 h-screen bg-white
+            // shadow-lg p-6 flex flex-col space-y-4 z-10'
 
-        className=' absolute top-[100%] right-0 
-        bg-white shadow-md rounded-lg
+            className='  bg-white shadow-md rounded-lg
       
         '
-        initial={{
-          // height: false,
-          width: false,
-          opacity: 1,
-        }}
-        animate={{
-          // height: isOpen ? "" : 0,
-          width: isOpen ? "" : 0,
-          opacity: isOpen ? 1 : 1,
-        }}
-        transition={{ duration: 0.2 }}>
-        <nav
-          className={`mt-1 space-y-6 text-lg font-medium list-none 
+            initial={{
+              // height: false,
+              width: false,
+              opacity: 0,
+            }}
+            animate={{
+              // height: isOpen ? "" : 0,
+              width: isOpen ? "" : 0,
+              opacity: isOpen ? 1 : 0,
+            }}
+            // transition={ { duration: 0.2 } }
+            exit={{ width: 0, opacity: 0 }}>
+            <nav
+              className={`mt-1 space-y-6 text-lg font-medium list-none 
          px-10 py-4 ${isOpen ? "flex flex-col" : "hidden"}`}>
-          <motion.a href='#home' className=''>
-            Home
-          </motion.a>
-          <a href='#prices' className=''>
-            Price
-          </a>
-          <a href='#verify' className=''>
-            Verify
-          </a>
-          <a href='#exchange' className=''>
-            Exchange
-          </a>
-          <a href='#contact' className=''>
-            Contact
-          </a>
-          <Link to='/dashboard?tab=overview' className=''>
-            Dashboard
-          </Link>
-        </nav>
-      </motion.div>
+              <a href='#home' className=''>
+                Home
+              </a>
+              <a href='#prices' className=''>
+                Price
+              </a>
+              <a href='#verify' className=''>
+                Verify
+              </a>
+              <a href='#exchange' className=''>
+                Exchange
+              </a>
+              <a href='#contact' className=''>
+                Contact
+              </a>
+              <Link to='/dashboard?tab=overview' className=''>
+                Dashboard
+              </Link>
+            </nav>
+          </motion.div>
+        </AnimatePresence>
+      </div>
 
       {/* Overlay */}
       {/* {isOpen && (
