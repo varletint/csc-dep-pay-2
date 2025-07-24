@@ -15,7 +15,7 @@ export default function AccountToggle() {
         <div className='text-start'>
           <span
             className='text-xl
-                   block font-bold text-[#555]'>
+                   block font-bold text-[#555] px-3'>
             {/* {currentUser.username} */}
             <Link to='/'>Dept.C Pay</Link>
           </span>

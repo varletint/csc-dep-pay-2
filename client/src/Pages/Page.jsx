@@ -21,8 +21,8 @@ export default function Home() {
   }, [location.search]);
   // const { currentUser } = useSelector((state) => state.user);
   return (
-    <motion.div
-      className='grid gap-4 p-4 lg:grid-cols-[220px,_1fr]
+    <div
+      className='grid gap-4 p- lg:grid-cols-[250px,_1fr]
       sm:grid-cols-[200px,_1fr]
       '
       initial={{ width: 0 }}
@@ -40,7 +40,7 @@ export default function Home() {
         {tab === "paid-students" && <DashPaidStudents />}
         {tab === "profile" && <DashProfile />}
       </div>
-    </motion.div>
+    </div>
   );
 }
 
