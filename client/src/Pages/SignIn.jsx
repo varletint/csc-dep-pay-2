@@ -15,17 +15,19 @@ export default function SignIn() {
   const [formData, setFormData] = useState({});
   // const [email, setEmail] = useState(form);
   const [isLoading, setIsLoading] = useState(false);
-  const { error: errorMessage } = useSelector((state) => state.user);
+  const { error: errorMessage, loading: showLoading } = useSelector(
+    (state) => state.user
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   document.title = "Login page";
 
-  console.log(formData);
-
+  // while (errorMessage) {
   useEffect(() => {
     dispatch(clearError());
   }, [dispatch]);
+  // }
 
   // const isValidEmail =(email)=> {
   // }
@@ -70,75 +72,79 @@ export default function SignIn() {
   return (
     <div className='h-[100vh]'>
       <div
-        className='flex max-w-[36rem] justify-center
+        className='flex max-w-[25rem] justify-center
          h-full flex-col mx-auto
        '>
-        <div className=''>
-          <h3 className='text-center sm:text-3xl mb-[1.25rem] text-2xl font-bold'>
-            Login Page
-          </h3>
-        </div>
-        <div className=''>
-          <form
-            onSubmit={handleSubmit}
-            className='flex flex-col gap-2 p-2 px-3 sm:px-[3rem]'>
-            <div className=''>
-              <label className=' font-semibold text-[#687a72]'>Email</label>
-              <div
-                className=' w-full mt-1.5 bg-[#ddebe0] flex 
+        <div className=' bg-white py-10 px-5 sm:px-0 rounded-xl shadow-md '>
+          <div className=' '>
+            <h3 className='text-center sm:text-3xl mb-[1.25rem] text-2xl font-bold'>
+              Login Page
+            </h3>
+          </div>
+          <div className=''>
+            <form
+              onSubmit={handleSubmit}
+              className='flex flex-col gap-2 sm:px-[2.2rem]'>
+              <div className=''>
+                <label className=' font-semibold text-[#687a72]'>Email</label>
+                <div
+                  className=' w-full mt-1.5 bg-[#ddebe0] flex 
               gap-3 items-center p-2 py-3  shadow rounded-lg'>
-                <HiOutlineMail size={23} className=' text-[#a1998a]' />
-                <input
-                  type='email '
-                  id='email'
-                  value={formData.email}
-                  className='w-full text-[#a1998a] border-none bg-transparent 
+                  <HiOutlineMail size={23} className=' text-[#a1998a]' />
+                  <input
+                    type='email '
+                    id='email'
+                    value={formData.email}
+                    className='w-full text-[#a1998a] border-none bg-transparent 
             placeholder:text-[#a1998a] placeholder:font-medium
           focus:outline-none'
-                  placeholder='Email'
-                  onChange={handleChange}
-                />
+                    placeholder='Email'
+                    onChange={handleChange}
+                  />
+                </div>
               </div>
-            </div>
-            <div className=''>
-              <label className=' font-semibold text-[#687a72]'>Password</label>
-              <div
-                className=' w-full mt-1.5 bg-[#ddebe0] flex 
+              <div className=''>
+                <label className=' font-semibold text-[#687a72]'>
+                  Password
+                </label>
+                <div
+                  className=' w-full mt-1.5 bg-[#ddebe0] flex 
               gap-3 items-center p-2 py-3  shadow rounded-lg'>
-                <HiOutlineLockClosed
-                  size={23}
-                  className=' 
+                  <HiOutlineLockClosed
+                    size={23}
+                    className=' 
                 text-[#8aa197]'
-                />
-                <input
-                  type='password'
-                  className='w-full border-none bg-transparent
+                  />
+                  <input
+                    type='password'
+                    className='w-full border-none bg-transparent
                   text-[#a1998a] 
             placeholder:text-[#a1998a] placeholder:font-medium
           focus:outline-none'
-                  placeholder='Password'
-                  id='password'
-                  onChange={handleChange}
-                />
+                    placeholder='Password'
+                    id='password'
+                    onChange={handleChange}
+                  />
+                </div>
               </div>
-            </div>
 
-            <button
-              className='bg-[#0d9488] p-2.5 mt-6 
+              <button
+                className='bg-[#0d9488] p-2.5 mt-6 
             text-white rounded-lg font-medium shadow'
-              type='submit'
-              disabled={isLoading}>
-              {isLoading ? <span>Loading</span> : "  Login"}
-            </button>
-          </form>
-          {errorMessage && (
-            <p
-              className='mt-2 text-center p-3 
+                type='submit'
+                disabled={isLoading}>
+                {isLoading ? <span>Loading...</span> : "  Login"}
+              </button>
+            </form>
+            {errorMessage && (
+              <p
+                className='mt-2 text-center p-3 
               text-red-600 font-medium text-sm
               '>
-              {errorMessage}
-            </p>
-          )}
+                {errorMessage}
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </div>

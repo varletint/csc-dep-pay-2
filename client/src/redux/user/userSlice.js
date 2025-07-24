@@ -56,6 +56,7 @@ const userSlice = createSlice({
     },
     clearError: (state) => {
       state.error = null;
+      state.loading = false;
     },
   },
 });

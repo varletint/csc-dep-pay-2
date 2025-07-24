@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaEdit, FaPencilAlt } from "react-icons/fa";
 import { HiOutlineExclamationCircle, HiPencil } from "react-icons/hi";
 import RecentTransactions from "./Dashboard/RecentTransactions";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function DashProfile() {
   const currentUser = {
@@ -101,57 +101,71 @@ export default function DashProfile() {
           />
         </div>
       </div>
-      {showModal ? (
-        <motion.form
-          onSubmit={handleSubmit}
-          className='fixed left-[50%] top-1/2   inset-0 
-        bg-white z-[1000] w-[350px] py-[rem] h-[px] sm:w-[px]
-        -translate-x-1/2 -translate-y-1/2 p-4 rounded-2xl  
-        '
-          initial={{ opacity: 0, height: 0 }}
-          animate={{
-            opacity: 1,
-            height: "250px",
+      <div
+        className='  
+        '>
+        <AnimatePresence initial={false}>
+          {showModal ? (
+            <div
+              className='fixed left-[50%] top-1/2   inset- 
+         z-[1000] ]
+        -translate-x-1/2 -translate-y-1/2 p-4 '>
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
+                onSubmit={handleSubmit}
+                className='bg-white w-[350px] h-auto py-5 rounded-2xl'
+                // initial={{ opacity: 0, height: 0 }}
+                // animate={{
+                //   opacity: 1,
+                //   height: "250px",
 
-            transition: { duration: 0.2 },
-          }}
-          exit={{
-            height: "0",
-            transition: { duration: 0.2 },
-          }}>
-          <div className='text-center '>
-            <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400 mx-auto mb-4' />
-            <p className=' font-semibold uppercase'>
-              {currentUser.matricNumber}
-            </p>
-            <h3 className=' text-gray-400 mb-5  '>
-              Are you sure want to you buy
-            </h3>
+                //   transition: { duration: 0.2 },
+                // }}
+                // exit={{
+                //   height: "0",
+                //   transition: { duration: 0.2 },
+                // }}
+              >
+                <form onSubmit={handleSubmit}>
+                  <div className='text-center '>
+                    <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400 mx-auto mb-4' />
+                    <p className=' font-semibold uppercase'>
+                      {currentUser.matricNumber}
+                    </p>
+                    <h3 className=' text-gray-400 mb-5  '>
+                      Are you sure want to you buy
+                    </h3>
 
-            <div className=' flex  justify-center gap-4'>
-              <button
-                className=' bg-green-600/90 p-3 font-semibold rounded-lg
+                    <div className=' flex  justify-center gap-4'>
+                      <button
+                        className=' bg-green-600/90 p-3 font-semibold rounded-lg
                 text-white shadow hover:bg-green-600/100
                 transition-[boxshadow,_background-color_color]
                  disabled:bg-green-600/60 disabled:cursor-not-allowed
               '
-                disabled={isLoading}>
-                Yes, i'm sure
-              </button>
-              <button
-                className='p-3 px-5 font-semibold rounded-lg
+                        disabled={isLoading}>
+                        Yes, i'm sure
+                      </button>
+                      <a
+                        className='p-3 px-5 font-semibold rounded-lg
                 text-green-800
                 bg-green-400/40 shadow hover:bg-green-400/50
                 transition-[boxshadow,_background-color_color]'
-                onClick={() => {
-                  setShowModal(false);
-                }}>
-                Cancel
-              </button>
+                        onClick={() => {
+                          setShowModal(false);
+                        }}>
+                        Cancel
+                      </a>
+                    </div>
+                  </div>
+                </form>
+              </motion.div>
             </div>
-          </div>
-        </motion.form>
-      ) : null}
+          ) : null}
+        </AnimatePresence>
+      </div>
       {showModal && (
         <div
           className='fixed  inset-0 bg-[#111] opacity-30 z-[100]'
