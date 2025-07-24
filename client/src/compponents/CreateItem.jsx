@@ -1,6 +1,10 @@
 import React from "react";
 
 export default function CreateItem() {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert("key press");
+  };
   return (
     <div className=' flex flex-col z-[101]'>
       <h1
@@ -8,7 +12,7 @@ export default function CreateItem() {
       sm:text-3xl sm:font-semibold text-[#04663b] '>
         Create Item
       </h1>
-      <form className='mt-10 flex flex-col gap-5'>
+      <form onSubmit={handleSubmit} className='mt-10 flex flex-col gap-5'>
         <div className=''>
           <label />
           <input

@@ -146,7 +146,7 @@ export default function DashProfile() {
                  disabled:bg-green-600/60 disabled:cursor-not-allowed
               '
                         disabled={isLoading}>
-                        Yes, i'm sure
+                        {isLoading ? "Processing..." : "Yes, i'm sure"}
                       </button>
                       <a
                         className='p-3 px-5 font-semibold rounded-lg
