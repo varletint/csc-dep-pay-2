@@ -26,8 +26,10 @@ export const webHook = async (req, res, next) => {
       //   const user = await User.findOne({ email });
       //   const item = await Item.findById(itemId);
       await Payment.create({
-        userdId: user?._id,
-        itemId: item?._id,
+          userdId
+            //   : user?._id,
+          itemId
+            //   : item?._id,
         amount,
         reference: ref,
         status: data.status,
