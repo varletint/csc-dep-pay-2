@@ -68,7 +68,7 @@ export default function Pay() {
 
   return (
     <div style={{ padding: "40px" }}>
-      <h2>Pay with Paystack (Vite + fetch)</h2>
+      <h2>im tired man!</h2>
       <input
         placeholder='User Email'
         value={email}
