@@ -4,7 +4,7 @@ const paymentSchema = new mongoose.Schema(
   {
     userdId: {
       type: String,
-      required: true,
+      // required: true,
     },
     itemId: {
       type: String,
@@ -12,7 +12,7 @@ const paymentSchema = new mongoose.Schema(
     },
     amount: {
       type: Number,
-      required: true,
+      // required: true,
     },
     reference: {
       type: String,
@@ -24,11 +24,11 @@ const paymentSchema = new mongoose.Schema(
     },
     gatewayResponse: {
       type: String,
-      required: true,
+      // required: true,
     },
     paidAt: {
       type: Date,
-      required: true,
+      // required: true,
     },
   },
   {
