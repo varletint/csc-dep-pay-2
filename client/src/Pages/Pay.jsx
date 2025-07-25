@@ -6,14 +6,16 @@ export default function Pay() {
   const [itemId, setItemId] = useState("");
   const [amount, setAmount] = useState("");
 
+  console.log(email, itemId, amount);
+
   const payWithPaystack = () => {
     const popup = new Paystack();
 
     popup.newTransaction({
       key: "pk_test_824b1c362014734e6d55e5e719c2cbd0ae40d361",
-      email: "sample@email.com",
-      amount: 2200 * 100,
-      first_name: "big man",
+      email: email,
+      amount: Number(amount) * 100,
+      itemId: itemId,
       callback: async function (response) {
         alert("Payment complete! Reference: " + response.reference);
       },
