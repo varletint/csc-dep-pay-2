@@ -1,5 +1,5 @@
 import { errorHandler } from "../utils/errorHandler.js";
-import payment from "../models/payement.model.js";
+import Payment from "../models/payment.model.js";
 import User from "../models/user.model.js";
 import Item from "../models/item.modal.js";
 import crypto from "crypto";
@@ -25,7 +25,7 @@ export const webHook = async (req, res, next) => {
     try {
       const user = await User.findOne({ email });
       const item = await Item.findById(itemId);
-      await payment.create({
+      await Payment.create({
         user: user?._id,
         item: item?._id,
         amount,

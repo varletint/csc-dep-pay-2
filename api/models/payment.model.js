@@ -23,7 +23,7 @@ const paymentSchema = new mongoose.Schema(
       required: true,
     },
     gatewayResponse: {
-      tyepe: String,
+      type: String,
       required: true,
     },
     paidAt: {
@@ -35,6 +35,6 @@ const paymentSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-const payement = mongoose.model("payment", paymentSchema);
+const Payment = mongoose.model("payment", paymentSchema);
 
-export default payement;
+export default Payment;
