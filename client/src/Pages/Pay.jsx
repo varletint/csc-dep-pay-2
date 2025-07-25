@@ -15,7 +15,13 @@ export default function Pay() {
       key: "pk_test_824b1c362014734e6d55e5e719c2cbd0ae40d361",
       email: email,
       amount: Number(amount) * 100,
-      itemId: itemId,
+
+      metadata: {
+        email: email,
+        itemId: itemId,
+        department: "Computer Science",
+        session: "2024/2025",
+      },
       callback: async function (response) {
         alert("Payment complete! Reference: " + response.reference);
       },
