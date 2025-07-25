@@ -16,6 +16,7 @@ import Download from "./Pages/Download";
 import Testing from "./Pages/Testing";
 import Home from "./Pages/Home";
 import { AnimatePresence } from "framer-motion";
+import Pay from "./Pages/Pay";
 
 function App() {
   return (
@@ -24,7 +25,8 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/pay/:price' element={<MakePayment />} />
+            {/* <Route path='/pay/:price' element={<MakePayment />} /> */}
+            <Route path='/pay' element={<Pay />} />
             <Route path='/payment-types' element={<TypesOfPayment />} />
             <Route path='/login' element={<SignIn />} />
             <Route path='/test' element={<Testing />} />

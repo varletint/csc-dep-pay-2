@@ -8,6 +8,7 @@ import path from "path";
 
 import itemRoutes from "./routes/item.route.js";
 import authRoutes from "./routes/auth.route.js";
+import webhooRoute from "./routes/webhook.route.js";
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.listen(3000, () => {
 
 app.use("/api/item", itemRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/webhook", webhooRoute);
 
 const __dirname = path.resolve();
 
