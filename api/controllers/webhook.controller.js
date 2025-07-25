@@ -17,10 +17,10 @@ export const webHook = async (req, res, next) => {
   const event = req.body;
   if (event.event === "charge.success") {
     const data = event.data;
-    const email = data.customer.email;
+    const email = data.email;
     const ref = data.reference;
     const amount = data.amount / 100;
-    const itemId = data.metadata?.itemId;
+    const itemId = data.itemId;
 
     try {
       const user = await User.findOne({ email });
