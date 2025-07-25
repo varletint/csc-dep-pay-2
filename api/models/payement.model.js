@@ -8,7 +8,7 @@ const paymentSchema = new mongoose.Schema(
     },
     itemId: {
       type: String,
-      required: true,
+      // required: true,
     },
     amount: {
       type: Number,
@@ -35,3 +35,6 @@ const paymentSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+const payement = mongoose.model("payment", paymentSchema);
+
+export default payement;
