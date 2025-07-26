@@ -19,7 +19,7 @@ export default function Pay() {
       metadata: { itemId: itemId },
       callback: async function (response) {
         alert("Payment complete! Reference: " + response.reference);
-        const updateWebhook = async (e) => {
+        const updateWebhook = async (response) => {
           try {
             const res = await fetch(
               `/api/webhook/update-paystack/${response.reference}`,
