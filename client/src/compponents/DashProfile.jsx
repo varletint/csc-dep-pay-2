@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaEdit, FaPencilAlt } from "react-icons/fa";
 import { HiOutlineExclamationCircle, HiPencil } from "react-icons/hi";
 import RecentTransactions from "./Dashboard/RecentTransactions";
+import Paystack from "@paystack/inline-js";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function DashProfile() {
@@ -14,61 +15,91 @@ export default function DashProfile() {
   // const [amount, setAmount] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [PaymentData, setPaymentData] = useState({
-    email: currentUser.matricNumber,
+    email: currentUser.matricNumber + "@gmail.com",
     amount: 5000,
   });
 
   // console.log(PaymentData);
 
+  const payWithPaystack = () => {
+    const popup = new Paystack();
+
+    popup.newTransaction({
+      key: "pk_test_824b1c362014734e6d55e5e719c2cbd0ae40d361",
+      email: PaymentData.email,
+      amount: Number(PaymentData.amount) * 100,
+
+      metadata: {
+        itemId: Math.floor(Math.random() * 1000),
+        email: PaymentData.email,
+      },
+      callback: async function (response) {
+        alert("Payment complete! Reference: " + response.reference);
+      },
+      onSuccess: (transaction) => {
+        console.log(transaction);
+      },
+      onLoad: (response) => {
+        console.log("onLoad: ", response);
+      },
+      onCancel: () => {
+        console.log("onCancel");
+      },
+      onError: (error) => {
+        console.log("Error: ", error.message);
+      },
+    });
+  };
+
   // const handleChange = (e) => {
   //   setPaymentData({ ...PaymentData, [e.target.id]: e.target.value.trim() });
   // };
 
-  const handleSubmit = async (e) => {
-    setIsLoading(true);
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   setIsLoading(true);
+  //   e.preventDefault();
 
-    if (!PaymentData.amount) return;
+  //   if (!PaymentData.amount) return;
 
-    try {
-      setIsLoading(true);
-      const response = await fetch(
-        "https://api.paystack.co/transaction/initialize",
-        {
-          method: "POST",
-          headers: {
-            Authorization:
-              "Bearer sk_test_1d3f0d7cd61c3a8476b995c7b0597daa67eb2d2f",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            // matricNo: formData.matricNo,
-            // firstname: formData.firstname,
-            // lastname: formData.lastname,
-            email: PaymentData.email + "@gmail.com",
-            amount: parseFloat(PaymentData.amount) * 100, // Convert to kobo/cents
-          }),
-        }
-      );
+  //   try {
+  //     setIsLoading(true);
+  //     const response = await fetch(
+  //       "https://api.paystack.co/transaction/initialize",
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           Authorization:
+  //             "Bearer sk_test_1d3f0d7cd61c3a8476b995c7b0597daa67eb2d2f",
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           // matricNo: formData.matricNo,
+  //           // firstname: formData.firstname,
+  //           // lastname: formData.lastname,
+  //           email: PaymentData.email + "@gmail.com",
+  //           amount: parseFloat(PaymentData.amount) * 100, // Convert to kobo/cents
+  //         }),
+  //       }
+  //     );
 
-      const data = await response.json();
+  //     const data = await response.json();
 
-      if (data.status) {
-        // Redirect to Paystack checkout page
-        // setPaymentDetails(data.data.authorization_url);
-        setIsLoading(false);
-        window.location.href = data.data.authorization_url;
-        // console.log(data);
-      } else {
-        setIsLoading(false);
-        console.log("Payment initialization failed. Please try again.");
-      }
-    } catch (err) {
-      // setError("An error occurred. Please try again later.");
-      setIsLoading(false);
-      console.error("Payment error:", err);
-    }
-  };
+  //     if (data.status) {
+  //       // Redirect to Paystack checkout page
+  //       // setPaymentDetails(data.data.authorization_url);
+  //       setIsLoading(false);
+  //       window.location.href = data.data.authorization_url;
+  //       // console.log(data);
+  //     } else {
+  //       setIsLoading(false);
+  //       console.log("Payment initialization failed. Please try again.");
+  //     }
+  //   } catch (err) {
+  //     // setError("An error occurred. Please try again later.");
+  //     setIsLoading(false);
+  //     console.error("Payment error:", err);
+  //   }
+  // };
 
   return (
     <div className=' py- sm:h-[auto]   bg-whit rounded-2xl shaow bg-rd-400'>
@@ -114,7 +145,6 @@ export default function DashProfile() {
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0 }}
-                onSubmit={handleSubmit}
                 className='bg-white w-[350px] h-auto py-5 rounded-2xl'
                 // initial={{ opacity: 0, height: 0 }}
                 // animate={{
@@ -128,39 +158,40 @@ export default function DashProfile() {
                 //   transition: { duration: 0.2 },
                 // }}
               >
-                <form onSubmit={handleSubmit}>
-                  <div className='text-center '>
-                    <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400 mx-auto mb-4' />
-                    <p className=' font-semibold uppercase'>
-                      {currentUser.matricNumber}
-                    </p>
-                    <h3 className=' text-gray-400 mb-5  '>
-                      Are you sure want to you buy
-                    </h3>
+                {/* <form onSubmit={handleSubmit}> */}
+                <div className='text-center '>
+                  <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400 mx-auto mb-4' />
+                  <p className=' font-semibold uppercase'>
+                    {currentUser.matricNumber}
+                  </p>
+                  <h3 className=' text-gray-400 mb-5  '>
+                    Are you sure want to you buy
+                  </h3>
 
-                    <div className=' flex  justify-center gap-4'>
-                      <button
-                        className=' bg-green-600/90 p-3 font-semibold rounded-lg
+                  <div className=' flex  justify-center gap-4'>
+                    <button
+                      className=' bg-green-600/90 p-3 font-semibold rounded-lg
                 text-white shadow hover:bg-green-600/100
                 transition-[boxshadow,_background-color_color]
                  disabled:bg-green-600/60 disabled:cursor-not-allowed
               '
-                        disabled={isLoading}>
-                        {isLoading ? "Processing..." : "Yes, i'm sure"}
-                      </button>
-                      <a
-                        className='p-3 px-5 font-semibold rounded-lg
+                      onClick={payWithPaystack}
+                      disabled={isLoading}>
+                      {isLoading ? "Processing..." : "Yes, i'm sure"}
+                    </button>
+                    <a
+                      className='p-3 px-5 font-semibold rounded-lg
                 text-green-800
                 bg-green-400/40 shadow hover:bg-green-400/50
                 transition-[boxshadow,_background-color_color]'
-                        onClick={() => {
-                          setShowModal(false);
-                        }}>
-                        Cancel
-                      </a>
-                    </div>
+                      onClick={() => {
+                        setShowModal(false);
+                      }}>
+                      Cancel
+                    </a>
                   </div>
-                </form>
+                </div>
+                {/* </form> */}
               </motion.div>
             </div>
           ) : null}
@@ -168,7 +199,7 @@ export default function DashProfile() {
       </div>
       {showModal && (
         <div
-          className='fixed  inset-0 bg-[#111] opacity-30 z-[100]'
+          className='fixed  inset-0 bg-[#111] opacity-80 z-[100]'
           onClick={() => setShowModal(false)}
         />
       )}

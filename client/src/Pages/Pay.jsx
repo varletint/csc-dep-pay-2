@@ -16,35 +16,9 @@ export default function Pay() {
       email: email,
       amount: Number(amount) * 100,
 
-      metadata: { itemId: itemId },
+      metadata: { itemId: itemId, email: email },
       callback: async function (response) {
         alert("Payment complete! Reference: " + response.reference);
-        const updateWebhook = async (response) => {
-          try {
-            const res = await fetch(
-              `/api/webhook/update-paystack/${response.reference}`,
-              {
-                method: "PUT",
-                headers: {
-                  "content-type": "application/json",
-                },
-                body: JSON.stringify({
-                  userId: email,
-                  itemId,
-                }),
-              }
-            );
-            const data = await res.json();
-            if (!res.ok) console.log(data.message);
-            if (data.success === false) console.log(data.message);
-            if (res.ok) {
-              console.log("update-success");
-            }
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        updateWebhook();
       },
       onSuccess: (transaction) => {
         console.log(transaction);

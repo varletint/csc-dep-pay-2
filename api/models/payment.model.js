@@ -6,6 +6,12 @@ const paymentSchema = new mongoose.Schema(
       type: String,
       // required: true,
     },
+    email: {
+      type: String,
+    },
+    matric: {
+      type: String,
+    },
     itemId: {
       type: String,
       // required: true,
