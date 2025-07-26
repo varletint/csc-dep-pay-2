@@ -26,7 +26,7 @@ export const webHook = async (req, res, next) => {
       //   const user = await User.findOne({ email });
       //   const item = await Item.findById(itemId);
       await Payment.create({
-        userdId: email,
+        userId: email,
         //   : user?._id,
         itemId: itemId,
         //   : item?._id,
@@ -42,4 +42,26 @@ export const webHook = async (req, res, next) => {
     }
   }
   res.sendStatus(200);
+};
+
+export const updateWebhook = async (req, res, next) => {
+  try {
+    const { userId, itemId } = req.body;
+    const updatedWebhook = await Payment.findByIdAndUpdate(
+      req.params.reference,
+      {
+        reference,
+        $set: {
+          userId,
+          itemId,
+        },
+      },
+      {
+        new: true,
+      }
+    );
+    res.status(200).json(updatedWebhook);
+  } catch (error) {
+    next(error);
+  }
 };
