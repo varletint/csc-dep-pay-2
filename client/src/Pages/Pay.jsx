@@ -16,7 +16,7 @@ export default function Pay() {
       email: email,
       amount: Number(amount) * 100,
 
-      metadata: { e: "e" },
+      metadata: { itemId: itemId },
       callback: async function (response) {
         alert("Payment complete! Reference: " + response.reference);
         const updateWebhook = async (e) => {
@@ -44,6 +44,7 @@ export default function Pay() {
             console.log(error);
           }
         };
+        updateWebhook();
       },
       onSuccess: (transaction) => {
         console.log(transaction);
