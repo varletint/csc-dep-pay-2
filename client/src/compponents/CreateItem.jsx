@@ -29,16 +29,19 @@ export default function CreateItem({ close }) {
       });
       const data = await res.json();
 
-      if (!res.ok || data.success === false) {
+      if (!res.ok) {
+        alert(data.message);
+      }
+      if (data.success === false) {
         alert(data.message);
       }
       if (res.ok) {
         setShowModal(true);
-        setTimeout(() => {
-          setShowModal(false);
-        }, 988);
+        // setTimeout(() => {
+        //   setShowModal(false);
+        // }, 988);
 
-        setShowModal(false);
+        // setShowModal(false);
         navigate("/dashboard?tab=profile");
       }
     } catch (error) {
