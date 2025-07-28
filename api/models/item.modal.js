@@ -9,25 +9,12 @@ const itemSchema = new mongoose.Schema(
     itemName: {
       type: String,
       required: true,
-      unique: true,
+      // unique: true,
     },
     category: {
       type: String,
       required: true,
     },
-    // slug: {
-    //   type: String,
-    //   required: true,
-    //   unique: true,
-    // },
-    // view: {
-    //   type: Number,
-    //   default: 0,
-    // },
-    // isfeatured: {
-    //   type: Boolean,
-    //   default: false,
-    // },
   },
   {
     timestamps: true,
