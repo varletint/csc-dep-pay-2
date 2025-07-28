@@ -30,7 +30,7 @@ export const createItem = async (req, res, next) => {
   // }
 
   const { price, itemName, category } = req.body;
-  if (!price || itemName || category)
+  if (!price || !itemName || !category)
     next(errorHandler(400, "All field are required"));
 
   const newItem = new Item({
