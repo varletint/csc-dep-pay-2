@@ -37,11 +37,12 @@ export default function CreateItem({ close }) {
       }
       if (res.ok) {
         setShowModal(true);
-        // setTimeout(() => {
-        //   setShowModal(false);
-        // }, 988);
+        setTimeout(() => {
+          setShowModal(false);
+        }, 988);
 
         // setShowModal(false);
+        console.log(data.items);
         navigate("/dashboard?tab=profile");
       }
     } catch (error) {
