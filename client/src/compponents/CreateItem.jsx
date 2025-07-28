@@ -22,8 +22,8 @@ export default function CreateItem({ close }) {
     try {
       const res = await fetch("/api/item/create-item", {
         method: "POST",
-        header: {
-          "content-type": "application/json",
+        headers: {
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
