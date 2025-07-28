@@ -39,7 +39,7 @@ export default function CreateItem({ close }) {
         setShowModal(true);
         setTimeout(() => {
           setShowModal(false);
-        }, 20000);
+        }, 5000);
 
         // setShowModal(false);
         console.log(data.items);
