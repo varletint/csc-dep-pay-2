@@ -54,9 +54,18 @@ const userSlice = createSlice({
       state.error = null;
       state.loading = false;
     },
+
     clearError: (state) => {
       state.error = null;
       state.loading = false;
+    },
+    addItemStart: (state) => {
+      (state.loading = true), (state.error = null);
+    },
+    addItemSuccess: (state, action) => {
+      state.currentUser = action.payload;
+      state.loading = false;
+      state.error = null;
     },
   },
 });
