@@ -28,7 +28,8 @@ export default function DashProfile() {
     const fetchItems = async () => {
       try {
         const res = await fetch("/api/item/get-items");
-        const data = await res.json;
+        const data = await res.json();
+
         if (!res.ok) {
           return alert(data.message);
         }
@@ -162,9 +163,7 @@ export default function DashProfile() {
                   onClick={() => setShowModal(!showModal)}
                 />
               ) : (
-                <option key={"no item"} disabled>
-                  No item for this Amount
-                </option>
+                <p key={"no item"}>No item for this Amount</p>
               )
             )}
           {/* <Card
