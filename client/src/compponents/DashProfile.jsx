@@ -52,7 +52,7 @@ export default function DashProfile() {
 
       metadata: {
         itemId: selectedItem._id,
-        email: PaymentData.email,
+        email: Number(selectedItem.price) * 100,
       },
       callback: async function (response) {
         alert("Payment complete! Reference: " + response.reference);
