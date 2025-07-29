@@ -22,6 +22,8 @@ export default function DashProfile() {
     amount: 5000,
   });
 
+  console.log(items);
+
   useEffect(() => {
     const fetchItems = async () => {
       try {
