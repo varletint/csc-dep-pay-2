@@ -48,11 +48,10 @@ export default function DashProfile() {
     popup.newTransaction({
       key: "pk_test_824b1c362014734e6d55e5e719c2cbd0ae40d361",
       email: PaymentData.email,
-      amount: PaymentData.amount,
-
+      amount: Number(selectedItem.price) * 100,
       metadata: {
         itemId: selectedItem._id,
-        email: Number(selectedItem.price) * 100,
+        email: PaymentData.email,
       },
       callback: async function (response) {
         alert("Payment complete! Reference: " + response.reference);
