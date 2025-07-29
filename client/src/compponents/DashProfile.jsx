@@ -14,12 +14,13 @@ export default function DashProfile() {
     matricNumber: "U22/fns/csc/2131",
   };
   const [isLoading, setIsLoading] = useState(false);
-  // const [amount, setAmount] = useState("");
+
   const [items, setItems] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
   const [PaymentData, setPaymentData] = useState({
     email: currentUser.matricNumber + "@gmail.com",
-    amount: 5000,
+    amount: selectedItem ? Number(selectedItem.price) * 100 : 0,
   });
 
   console.log(items);
@@ -49,10 +50,10 @@ export default function DashProfile() {
     popup.newTransaction({
       key: "pk_test_824b1c362014734e6d55e5e719c2cbd0ae40d361",
       email: PaymentData.email,
-      amount: Number(PaymentData.amount) * 100,
+      amount: PaymentData.amount,
 
       metadata: {
-        itemId: Math.floor(Math.random() * 1000),
+        itemId: selectedItem._id,
         email: PaymentData.email,
       },
       callback: async function (response) {
@@ -160,7 +161,10 @@ export default function DashProfile() {
                   key={item._id}
                   nameType={item.itemName}
                   description={"for 100L"}
-                  onClick={() => setShowModal(!showModal)}
+                  onClick={() => {
+                    setSelectedItem(item);
+                    setShowModal(true);
+                  }}
                 />
               ) : (
                 <p key={"no item"}>No item for this Amount</p>
@@ -211,8 +215,13 @@ export default function DashProfile() {
                   <p className=' font-semibold uppercase'>
                     {currentUser.matricNumber}
                   </p>
-                  <h3 className=' text-gray-400 mb-5  '>
+                  {/* <h3 className=' text-gray-400 mb-5  '>
                     Are you sure want to you buy
+                  </h3> */}
+                  <h3 className='text-gray-400 mb-5'>
+                    Are you sure you want to buy{" "}
+                    <strong>{selectedItem?.itemName}</strong> for ₦
+                    {selectedItem?.price}?
                   </h3>
 
                   <div className=' flex  justify-center gap-4'>
