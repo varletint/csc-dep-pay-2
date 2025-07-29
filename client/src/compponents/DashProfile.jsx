@@ -20,10 +20,8 @@ export default function DashProfile() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [PaymentData, setPaymentData] = useState({
     email: currentUser.matricNumber + "@gmail.com",
-    amount: selectedItem ? Number(selectedItem.price) * 100 : 0,
+    amount: Number(selectedItem.price) * 100,
   });
-
-  console.log(items);
 
   useEffect(() => {
     const fetchItems = async () => {
