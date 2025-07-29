@@ -145,9 +145,31 @@ export default function DashProfile() {
           <HiPencil size='20' />
         </div>
         <div className='grid grid-cols-2 gap-4 mt-10 mb-'>
-          <Card
+          {items.length > 0 &&
+            items.map((item) =>
+              item ? (
+                // <option key={item._id}>{item.itemName}</option>
+                <Card
+                  className='bg-[#ddebe0] text-[#7a998a] shadow
+          hover:bg-[#ddebe0]/60  rounded-lg  block 
+          transition-[box-shadow,_background-color_color]
+          h-[180px]'
+                  imgSrc={img1}
+                  amount={item.price}
+                  key={item._id}
+                  nameType={item.itemName}
+                  description={"for 100L"}
+                  onClick={() => setShowModal(!showModal)}
+                />
+              ) : (
+                <option key={"no item"} disabled>
+                  No item for this Amount
+                </option>
+              )
+            )}
+          {/* <Card
             className='bg-[#ddebe0] text-[#7a998a] shadow
-    hover:bg-[#ddebe0]/60  rounded-lg  flex flex-col 
+    hover:bg-[#ddebe0]/60  rounded-lg  block 
     transition-[box-shadow,_background-color_color]
     h-[180px]'
             imgSrc={img1}
@@ -155,7 +177,7 @@ export default function DashProfile() {
             nameType={"Manual 104"}
             description={"for 100L"}
             onClick={() => setShowModal(!showModal)}
-          />
+          /> */}
         </div>
       </div>
       <div
@@ -251,25 +273,24 @@ const Card = ({
     // '>
     <button className={className} onClick={onClick}>
       <div
-        className='img-sec w-full bg-white h-[140px] 
-      rounded-tr-lg rounded-tl-lg'>
+        className='img-sec w-full bg-white h-[130px] 
+      rounded-tr-lg rounded-tl-lg relative'>
         <img
           className=' w-full h-full  object-cover
           rounded-tr-lg rounded-tl-lg border-none outline-none 
-          relative'
+          '
           src={imgSrc}
           alt={nameType + "-" + description}
         />
       </div>
-      <div className='item-details flex  justify-between px-2 mt-2'>
-        <h1 className='uppercase font-bold '>{nameType}</h1>
-        <p
-          className=' font-semibold absolute top-1/2 
-        bg-green-100/80 p-0.5 px-1 mt-2 text-[.95rem] text-green-600
-         rounded-md '>
-          ₦{amount}
-        </p>
-        <p className=' font-medium  text-sm '>{description}'s</p>
+      <div className=' flex flex-col mt-0.5 px-3 py-1'>
+        <h1
+          className='uppercase text-sm 
+      inline-block text-nowrap font-bold text-start  '>
+          {nameType}
+        </h1>
+        <p className=' font-semibold  text-start  '>₦{amount}</p>
+        {/* <p className=' font-medium  text-[.8rem] '>{description}'s</p> */}
       </div>
     </button>
     // </form>
