@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaEdit, FaPencilAlt } from "react-icons/fa";
 import { HiOutlineExclamationCircle, HiPencil } from "react-icons/hi";
 import RecentTransactions from "./Dashboard/RecentTransactions";
 import Paystack from "@paystack/inline-js";
 import { AnimatePresence, motion } from "framer-motion";
+
+import img1 from "../assets/images/ibbul-img.webp";
 
 export default function DashProfile() {
   const currentUser = {
@@ -13,13 +15,29 @@ export default function DashProfile() {
   };
   const [isLoading, setIsLoading] = useState(false);
   // const [amount, setAmount] = useState("");
+  const [items, setItems] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [PaymentData, setPaymentData] = useState({
     email: currentUser.matricNumber + "@gmail.com",
     amount: 5000,
   });
 
-  // console.log(PaymentData);
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const res = await fetch("/api/item/get-items");
+        const data = await res.json;
+        if (!res.ok) {
+          return alert(data.message);
+        }
+
+        setItems(data.items);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchItems();
+  }, []);
 
   const payWithPaystack = () => {
     setShowModal(!showModal);
@@ -126,6 +144,11 @@ export default function DashProfile() {
         </div>
         <div className='grid grid-cols-2 gap-4 mt-10 mb-'>
           <Card
+            className='bg-[#ddebe0] text-[#7a998a] shadow
+    hover:bg-[#ddebe0]/60  rounded-lg  flex flex-col 
+    transition-[box-shadow,_background-color_color]
+    h-[180px]'
+            imgSrc={img1}
             amount={2200}
             nameType={"Manual 104"}
             description={"for 100L"}
@@ -208,7 +231,14 @@ export default function DashProfile() {
   );
 }
 
-const Card = ({ amount, nameType, description, onClick }) => {
+const Card = ({
+  amount,
+  nameType,
+  description,
+  onClick,
+  className,
+  imgSrc,
+}) => {
   return (
     //     <form
     //       onSubmit={onSubmit}
@@ -217,18 +247,28 @@ const Card = ({ amount, nameType, description, onClick }) => {
     //     transition-[box-shadow,_background-color_color] flex flex-col  py-3
     //    items-center
     // '>
-    <button
-      className=' bg-[#ddebe0] text-[#7a998a] shadow
-    hover:bg-[#ddebe0]/60  rounded-lg
-    transition-[box-shadow,_background-color_color] flex flex-col  py-3
-   items-center
-'
-      onClick={onClick}>
-      <h1 className=' font-semibold text-xl text-nowrap inline-block'>
-        {nameType}
-      </h1>
-      <p className=' font-semibold mt-3 '>₦{amount}</p>
-      <p className=' font-semibold mt-2 '>{description}</p>
+    <button className={className} onClick={onClick}>
+      <div
+        className='img-sec w-full bg-white h-[140px] 
+      rounded-tr-lg rounded-tl-lg'>
+        <img
+          className=' w-full h-full  object-cover
+          rounded-tr-lg rounded-tl-lg border-none outline-none 
+          relative'
+          src={imgSrc}
+          alt={nameType + "-" + description}
+        />
+      </div>
+      <div className='item-details flex  justify-between px-2 mt-2'>
+        <h1 className='uppercase font-bold '>{nameType}</h1>
+        <p
+          className=' font-semibold absolute top-1/2 
+        bg-green-100/80 p-0.5 px-1 mt-2 text-[.95rem] text-green-600
+         rounded-md '>
+          ₦{amount}
+        </p>
+        <p className=' font-medium  text-sm '>{description}'s</p>
+      </div>
     </button>
     // </form>
   );
