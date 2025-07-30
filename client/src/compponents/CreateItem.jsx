@@ -15,6 +15,8 @@ import {
 //    npx update-browserslist-db@latest
 
 export default function CreateItem({ close }) {
+  const [price, setPrice] = useState("");
+
   const [formData, setFormData] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -27,6 +29,21 @@ export default function CreateItem({ close }) {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const formatCurrency = (value) => {
+    const number = Number(value.replace(/\D/g, "")); // remove non-digits
+    return new Intl.NumberFormat("en-NG", {
+      style: "currency",
+      currency: "NGN",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(number);
+  };
+  const handlePriceChange = (e) => {
+    const raw = e.target.value.replace(/\D/g, ""); // only digits
+    setPrice(raw);
+    setFormData({ ...formData, price: raw }); // store raw number
   };
 
   useEffect(() => {
@@ -105,11 +122,12 @@ export default function CreateItem({ close }) {
         <div className=''>
           <label />
           <input
-            type='number'
+            type='text'
             name='price'
             id='price'
             // required
-            onChange={handleChange}
+            value={price ? formatCurrency(price) : ""}
+            onChange={handlePriceChange}
             placeholder='Price of the Item'
             className='bg-[#ddebe0] w-full py-3 rounded-lg px-5
             placeholder:text-[#8aa197] focus:outline-none 

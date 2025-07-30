@@ -22,7 +22,6 @@ export default function DashProfile() {
     // amount: selectedItem.price * 100,
   });
   const [showModal, setShowModal] = useState(false);
-  console.log(selectedItem);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -155,7 +154,12 @@ export default function DashProfile() {
           transition-[box-shadow,_background-color_color]
           h-[180px]'
                   imgSrc={img1}
-                  amount={item.price}
+                  amount={new Intl.NumberFormat("en-NG", {
+                    style: "currency",
+                    currency: "NGN",
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
+                  }).format(item.price)}
                   key={item._id}
                   nameType={item.itemName}
                   description={"for 100L"}
@@ -218,8 +222,16 @@ export default function DashProfile() {
                   </h3> */}
                   <h3 className='text-gray-400 mb-5'>
                     Are you sure you want to buy{" "}
-                    <strong>{selectedItem?.itemName}</strong> for ₦
-                    {selectedItem?.price}?
+                    <strong>{selectedItem?.itemName}</strong> for{" "}
+                    <strong>
+                      {new Intl.NumberFormat("en-NG", {
+                        style: "currency",
+                        currency: "NGN",
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                      }).format(selectedItem?.price)}
+                    </strong>
+                    ?
                   </h3>
 
                   <div className=' flex  justify-center gap-4'>
@@ -295,7 +307,7 @@ const Card = ({
       inline-block text-nowrap font-bold text-start  '>
           {nameType}
         </h1>
-        <p className=' font-semibold  text-start  '>₦{amount}</p>
+        <p className=' font-semibold  text-start  '>{amount}</p>
         {/* <p className=' font-medium  text-[.8rem] '>{description}'s</p> */}
       </div>
     </button>
