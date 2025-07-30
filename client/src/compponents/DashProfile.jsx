@@ -16,12 +16,13 @@ export default function DashProfile() {
   const [isLoading, setIsLoading] = useState(false);
 
   const [items, setItems] = useState([]);
-  const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [PaymentData, setPaymentData] = useState({
     email: currentUser.matricNumber + "@gmail.com",
-    amount: Number(selectedItem.price) * 100,
+    // amount: selectedItem.price * 100,
   });
+  const [showModal, setShowModal] = useState(false);
+  console.log(selectedItem);
 
   useEffect(() => {
     const fetchItems = async () => {
