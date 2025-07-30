@@ -14,7 +14,7 @@ import {
 //      Browserslist: browsers data( caniuse - lite ) is 35 months old.Please run:
 //    npx update-browserslist-db@latest
 
-export default function CreateItem({ close }) {
+export default function CreateItem({}) {
   const [price, setPrice] = useState("");
 
   const [formData, setFormData] = useState({});

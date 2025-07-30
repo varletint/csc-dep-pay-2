@@ -73,3 +73,15 @@ export const getItems = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getUserPurchasedItems = async (req, res, next) => {
+  try {
+    const userPurchasedItems = await Item.find({
+      userId: req.params.userId,
+    }).sort({ createdAt: -1 });
+
+    res.status(200).json(userPurchasedItems);
+  } catch (error) {
+    next(error);
+  }
+};
