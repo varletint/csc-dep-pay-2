@@ -52,10 +52,6 @@ export default function CreateItem({ close }) {
     setFormData({ ...formData, price: raw }); // store raw number
   };
 
-  // useEffect(() => {
-  //   dispatch(clearError());
-  // }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -100,9 +96,6 @@ export default function CreateItem({ close }) {
       setLoadErrorMessage(error.message);
       dispatch(addItemFailure(error.message));
     }
-    // clearTimeout(() => {
-    //   setTimeOut;
-    // });
   };
   return (
     <div className=' flex flex-col z-[101]'>
@@ -141,13 +134,7 @@ export default function CreateItem({ close }) {
           />
         </div>
         <div className=''>
-          <div
-            className='category'
-            id='category'
-            // onChange={(e) => {
-            //   setFormData({ ...formData, category: e.target.value });
-            // } }
-          >
+          <div className='category' id='category'>
             <div
               className='different bg-[#ddebe0] w-full py-3 rounded-lg px-5
             placeholder:text-[#8aa197] shadow font-medium'>
@@ -195,55 +182,16 @@ export default function CreateItem({ close }) {
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0 }}
-                className='bg-white w-[350px] h-auto py-5 rounded-2xl'
-                // initial={{ opacity: 0, height: 0 }}
-                // animate={{
-                //   opacity: 1,
-                //   height: "250px",
-
-                //   transition: { duration: 0.2 },
-                // }}
-                // exit={{
-                //   height: "0",
-                //   transition: { duration: 0.2 },
-                // }}
-              >
-                {/* <form onSubmit={handleSubmit}> */}
+                className='bg-white w-[350px] h-auto py-5 rounded-2xl'>
                 <div className='text-center '>
                   <HiThumbUp className='h-14 w-14 text-green-500 mx-auto mb-4' />
-                  <p className=' font-semibold uppercase'>
-                    {/* {currentUser.matricNumber} */}
-                  </p>
+                  <p className=' font-semibold uppercase'></p>
                   <h3 className=' text-[#222] mb-  '>
-                    {/* Are you sure want to you buy */}
                     Your Item has been <br /> upload successful
                   </h3>
 
-                  <div className=' flex  justify-center gap-4'>
-                    {/* <button
-                      className=' bg-green-600/90 p-3 font-semibold rounded-lg
-                text-white shadow hover:bg-green-600/100
-                transition-[boxshadow,_background-color_color]
-                 disabled:bg-green-600/60 disabled:cursor-not-allowed
-              '
-                      // onClick={payWithPaystack}
-                      // disabled={isLoading}
-                    >
-                      
-                    </button> */}
-                    {/* <a
-                      className='p-3 px-5 font-semibold rounded-lg
-                text-green-800
-                bg-green-400/40 shadow hover:bg-green-400/50
-                transition-[boxshadow,_background-color_color]'
-                      onClick={() => {
-                        setShowModal(false);
-                      }}>
-                      Cancel
-                    </a> */}
-                  </div>
+                  <div className=' flex  justify-center gap-4'></div>
                 </div>
-                {/* </form> */}
               </motion.div>
             </div>
           ) : null}
