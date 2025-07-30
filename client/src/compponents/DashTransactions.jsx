@@ -16,7 +16,7 @@ export default function DashTransactions() {
       setUserPurchasedItems(data.items);
     };
     fetchUserItems();
-  }, [userPaymentItems]);
+  }, [userPurchasedItems]);
   return (
     <div className='bg-white rounded-lg pt-4 min-h-[100vh] shadow '>
       <div className=' gap-3 px-4 grid'>
