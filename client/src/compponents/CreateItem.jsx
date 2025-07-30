@@ -27,6 +27,12 @@ export default function CreateItem({ close }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  setTimeout(() => {
+    if (errorMessage) {
+      dispatch(clearError());
+    }
+  }, 1000);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
@@ -46,9 +52,9 @@ export default function CreateItem({ close }) {
     setFormData({ ...formData, price: raw }); // store raw number
   };
 
-  useEffect(() => {
-    dispatch(clearError());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(clearError());
+  // }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -85,7 +91,7 @@ export default function CreateItem({ close }) {
         setShowModal(true);
         setTimeout(() => {
           setShowModal(false);
-        }, 2000);
+        }, 1500);
 
         dispatch(addItemSuccess(data));
         navigate("/dashboard?tab=profile");
