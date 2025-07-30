@@ -144,7 +144,7 @@ export default function DashProfile() {
           </div>
           <HiPencil size='20' />
         </div>
-        <div className='grid grid-cols-2 gap-4 mt-10 mb-'>
+        <div className='grid grid-cols-2 gap-4 mt-10 mb-4'>
           {items.length > 0 &&
             items.map((item) =>
               item ? (
