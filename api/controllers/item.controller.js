@@ -1,6 +1,7 @@
 import { errorHandler } from "../utils/errorHandler.js";
 import { buildItemQuery } from "../utils/queryBuilder.js";
 import Item from "../models/item.modal.js";
+import Payment from "../models/payment.model.js";
 
 export const createItem = async (req, res, next) => {
   // const priceTag = req.body.priceTag;
@@ -76,7 +77,7 @@ export const getItems = async (req, res, next) => {
 
 export const getUserPurchasedItems = async (req, res, next) => {
   try {
-    const userPurchasedItems = await Item.find({
+    const userPurchasedItems = await Payment.find({
       userId: req.params.userId,
     }).sort({ createdAt: -1 });
 
