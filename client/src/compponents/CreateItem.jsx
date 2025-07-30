@@ -157,7 +157,7 @@ export default function CreateItem({ close }) {
           type='submit'
           className='bg-[#3e5a4e]
            font-medium text-white p-[12px] rounded-lg mt-4
-           disabled:bg-[#3e5a4e]/80'
+           disabled:bg-[#3e5a4e]/80 disabled:cursor-not-allowed'
           disabled={isLoad}>
           {isLoad ? "Adding item..." : "Add item"}
         </button>
