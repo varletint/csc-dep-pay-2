@@ -85,7 +85,7 @@ export default function CreateItem({ close }) {
         setShowModal(true);
         setTimeout(() => {
           setShowModal(false);
-        }, 3000);
+        }, 2000);
 
         dispatch(addItemSuccess(data));
         navigate("/dashboard?tab=profile");
