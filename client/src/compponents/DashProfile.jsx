@@ -245,7 +245,7 @@ export default function DashProfile() {
                       disabled={isLoading}>
                       {isLoading ? "Processing..." : "Yes, i'm sure"}
                     </button>
-                    <a
+                    <button
                       className='p-3 px-5 font-semibold rounded-lg
                 text-green-800
                 bg-green-400/40 shadow hover:bg-green-400/50
@@ -254,7 +254,7 @@ export default function DashProfile() {
                         setShowModal(false);
                       }}>
                       Cancel
-                    </a>
+                    </button>
                   </div>
                 </div>
                 {/* </form> */}
