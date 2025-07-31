@@ -58,6 +58,7 @@ export default function DashProfile() {
         itemId: selectedItem._id,
         email: currentUser.email,
         userId: currentUser._id,
+        matricNumber: currentUser.matricNumber,
       },
       callback: async function (response) {
         alert("Payment complete! Reference: " + response.reference);
