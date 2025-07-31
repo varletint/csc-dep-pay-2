@@ -4,7 +4,7 @@ const paymentSchema = new mongoose.Schema(
   {
     userId: {
       type: String,
-      // required: true,
+      required: true,
     },
     email: {
       type: String,
@@ -16,6 +16,10 @@ const paymentSchema = new mongoose.Schema(
       type: String,
       // required: true,
     },
+    itemName: {
+      type: String,
+      // required: true,
+    },
     amount: {
       type: Number,
       // required: true,
@@ -23,6 +27,7 @@ const paymentSchema = new mongoose.Schema(
     reference: {
       type: String,
       unique: true,
+      required: true,
     },
     status: {
       type: String,

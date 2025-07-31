@@ -9,24 +9,11 @@ import { useSelector } from "react-redux";
 import img1 from "../assets/images/ibbul-img.webp";
 
 export default function DashProfile() {
-  // const currentUser = {
-  //   user: "Adam Abduljalil",
-  //   email: "adam@gmail.com",
-  //   matricNumber: "U22/fns/csc/2131",
-  // };
-
   const { currentUser } = useSelector((state) => state.user);
   const [isLoading, setIsLoading] = useState(false);
-
   const [items, setItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
-  // const [PaymentData, setPaymentData] = useState({
-  //   email: currentUser.matricNumber + "@gmail.com",
-  //   // amount: selectedItem.price * 100,
-  // });
   const [showModal, setShowModal] = useState(false);
-
-  console.log(currentUser.role);
 
   useEffect(() => {
     const fetchItems = async () => {

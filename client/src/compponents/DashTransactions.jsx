@@ -66,7 +66,12 @@ export default function DashTransactions() {
                       matric={item.matricNumber}
                       item={item.itemName}
                       // category={item.category}
-                      amount={item.amount}
+                      amount={new Intl.NumberFormat("en-NG", {
+                        style: "currency",
+                        currency: "NGN",
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                      }).format(item.amount)}
                       date={new Date(item.createdAt).toLocaleDateString()}
                     />
                   ) : (
@@ -107,7 +112,7 @@ const TableRow = ({ matric, category, date, amount, item }) => {
       <td className='p-1.5 whitespace-nowrap'>{date}</td>
       <td className='p-1.5'>
         {" "}
-        <span className='line-through whitespace-nowrap'>N</span>
+        <span className='line-through whitespace-nowrap'></span>
         {amount}
       </td>
     </tr>
