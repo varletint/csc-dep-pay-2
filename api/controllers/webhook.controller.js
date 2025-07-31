@@ -26,8 +26,6 @@ export const webHook = async (req, res, next) => {
     const itemName = data.metadata?.itemName;
 
     try {
-      //   const user = await User.findOne({ email });
-      //   const item = await Item.findById(itemId);
       await Payment.create({
         userId: userId,
         email: email,
