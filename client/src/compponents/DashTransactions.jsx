@@ -27,12 +27,7 @@ export default function DashTransactions() {
         Loading...
       </p>
     );
-  if (userPurchasedItems.length === 0)
-    return (
-      <p className=' flex justify-center text-center mt-10 min-h-screen text-lg '>
-        No transactions found. You have not purchased any item yet.
-      </p>
-    );
+
   return (
     <div className='bg-white rounded-lg pt-4 min-h-[100vh] shadow '>
       <div className=' gap-3 px-4 grid'>
@@ -57,13 +52,12 @@ export default function DashTransactions() {
           <table className=' w-full table-row'>
             <TableHead />
             <tbody>
-              {/* <TableRow
-                matric={"u20/fns/csc/1110"}
-                item={"Manual 403"}
-                category={"Manuals and Books"}
-                amount={1200}
-                date={"12/06/2025"}
-              /> */}
+              {!isLoading && userPurchasedItems.length === 0 && (
+                <p className=' text-l text-red-500'>
+                  {" "}
+                  No trasactions have been made yet
+                </p>
+              )}
               {userPurchasedItems.length > 0 &&
                 userPurchasedItems.map((item) =>
                   item ? (

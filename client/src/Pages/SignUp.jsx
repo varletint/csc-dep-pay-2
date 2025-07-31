@@ -66,7 +66,7 @@ export default function SignUp() {
       if (res.ok) {
         setIsLoading(false);
         dispatch(signInSuccess(data));
-        navigate(`/dashboard?tab=profile`);
+        navigate(`/login`);
       }
     } catch (error) {
       dispatch(signInFailure(error.message));
@@ -179,7 +179,7 @@ export default function SignUp() {
               <button
                 className='bg-[#0d9488] 
                 disabled:bg-[#0d9488]/75
-                 p-2.5 mt-6 disabled:cursor-not-allowed
+                 p-2 mt-6 disabled:cursor-not-allowed
             text-white rounded-lg font-medium shadow'
                 type='submit'
                 disabled={showLoading}>
@@ -189,6 +189,14 @@ export default function SignUp() {
                   "  Create Account"
                 )}
               </button>
+              <p className='text-center text-sm text-[#687a72]'>
+                Already have an account?{" "}
+                <Link
+                  to='/login'
+                  className='text-[#0d9488] font-medium hover:underline'>
+                  Login
+                </Link>
+              </p>
             </form>
             {errorMessage && (
               <p

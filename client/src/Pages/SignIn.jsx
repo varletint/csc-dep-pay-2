@@ -129,13 +129,22 @@ export default function SignIn() {
               <button
                 className='bg-[#0d9488] 
                 disabled:bg-[#0d9488]/75
-                 p-2.5 mt-6 disabled:cursor-not-allowed
+                 p-2 mt-6 disabled:cursor-not-allowed
             text-white rounded-lg font-medium shadow'
                 type='submit'
                 disabled={showLoading}>
                 {showLoading ? <span>Processing...</span> : "  Login"}
               </button>
+              <p className='text-center text-sm text-[#687a72]'>
+                Don't have an account?{" "}
+                <Link
+                  to='/register'
+                  className='text-[#0d9488] font-medium hover:underline'>
+                  Sign Up
+                </Link>
+              </p>
             </form>
+
             {errorMessage && (
               <p
                 className='mt-2 text-center p-3 

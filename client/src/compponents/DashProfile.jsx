@@ -16,17 +16,21 @@ export default function DashProfile() {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
+    document.title = "Profile - Dashboard ";
     const fetchItems = async () => {
       try {
+        setIsLoading(true);
         const res = await fetch("/api/item/get-items");
         const data = await res.json();
 
         if (!res.ok) {
+          setIsLoading(false);
           return alert(data.message);
         }
-
+        setIsLoading(false);
         setItems(data.items);
       } catch (error) {
+        setIsLoading(false);
         console.log(error);
       }
     };
@@ -145,7 +149,11 @@ export default function DashProfile() {
           <HiPencil size='20' />
         </div>
         <div className='grid grid-cols-2 gap-4 mt-10 mb-4'>
-          {items.length > 0 &&
+          {isLoading && (
+            <p className=' text-center col-span-2 text-lg'> loading...</p>
+          )}
+          {!isLoading &&
+            items.length > 0 &&
             items.map((item) =>
               item ? (
                 // <option key={item._id}>{item.itemName}</option>
