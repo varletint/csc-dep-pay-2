@@ -6,6 +6,7 @@ export default function DashTransactions() {
   const [userPurchasedItems, setUserPurchasedItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
+    document.title = "Transactions | Dashboard";
     const fetchUserItems = async () => {
       setIsLoading(true);
       const res = await fetch(`/api/item/purchased-items/${currentUser._id}`);
@@ -22,9 +23,15 @@ export default function DashTransactions() {
   }, []);
   if (isLoading)
     return (
-      <a className=' flex justify-center mt-10 min-h-screen text-lg '>
+      <p className=' flex justify-center mt-10 min-h-screen text-lg '>
         Loading...
-      </a>
+      </p>
+    );
+  if (userPurchasedItems.length === 0)
+    return (
+      <p className=' flex justify-center text-center mt-10 min-h-screen text-lg '>
+        No transactions found. You have not purchased any item yet.
+      </p>
     );
   return (
     <div className='bg-white rounded-lg pt-4 min-h-[100vh] shadow '>
