@@ -9,7 +9,7 @@ const paymentSchema = new mongoose.Schema(
     email: {
       type: String,
     },
-    matric: {
+    matricNumber: {
       type: String,
     },
     itemId: {

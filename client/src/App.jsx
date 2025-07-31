@@ -9,6 +9,7 @@ import SignIn from "./Pages/SignIn";
 import AdminPrivate from "./compponents/AdminPrivate";
 import Page from "./Pages/Page";
 import CreateAccount from "./Pages/CreateAccount";
+import SignUp from "./Pages/SignUp";
 import GeneratePaymentDetails from "./Pages/GeneratePaymentDetails";
 import TransanctionVerification from "./Pages/TransanctionVerification";
 import UploadSuccessful from "./Pages/UploadSuccessful";
@@ -17,6 +18,7 @@ import Testing from "./Pages/Testing";
 import Home from "./Pages/Home";
 import { AnimatePresence } from "framer-motion";
 import Pay from "./Pages/Pay";
+import PrivateRoute from "./compponents/PrivateRoute";
 
 function App() {
   return (
@@ -28,6 +30,7 @@ function App() {
             {/* <Route path='/pay/:price' element={<MakePayment />} /> */}
             <Route path='/pay' element={<Pay />} />
             <Route path='/payment-types' element={<TypesOfPayment />} />
+            <Route path='/register' element={<SignUp />} />
             <Route path='/login' element={<SignIn />} />
             <Route path='/test' element={<Testing />} />
             <Route
@@ -46,7 +49,7 @@ function App() {
             {/* <Route path='/register' element={<CreateAccount />} /> */}
 
             {/* Private Routes */}
-            {/* <Route element={<AdminPrivate />}> */}
+            {/* <Route element={<PrivateRoute />}> */}
             <Route path='/dashboard' element={<Page />} />
             <Route path='/create-item' element={<CreateItem />} />
             {/* </Route> */}

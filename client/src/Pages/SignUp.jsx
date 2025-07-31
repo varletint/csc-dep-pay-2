@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { FaLock } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { HiOutlineLockClosed, HiOutlineMail } from "react-icons/hi";
+import {
+  HiOutlineLockClosed,
+  HiOutlineMail,
+  HiOutlineUserCircle,
+} from "react-icons/hi";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -11,7 +15,7 @@ import {
   clearError,
 } from "../redux/user/userSlice";
 
-export default function SignIn() {
+export default function SignUp() {
   const [formData, setFormData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const { error: errorMessage, loading: showLoading } = useSelector(
@@ -21,6 +25,8 @@ export default function SignIn() {
   const navigate = useNavigate();
 
   document.title = "Login page";
+
+  console.log(formData);
 
   if (errorMessage) {
     setTimeout(() => {
@@ -34,7 +40,7 @@ export default function SignIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.email || !formData.password) {
+    if (!formData.matricNumber || !formData.password) {
       return dispatch(signInFailure("Fields cannot be empty"));
     }
 
@@ -42,7 +48,7 @@ export default function SignIn() {
       setIsLoading(true);
       dispatch(signInStart());
 
-      const res = await fetch(`/api/auth/signin`, {
+      const res = await fetch(`/api/auth/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -74,7 +80,7 @@ export default function SignIn() {
         <div className=' bg-white py-10 px-5 sm:px-0 rounded-xl shadow-md '>
           <div className=' '>
             <h3 className='text-center sm:text-3xl mb-[1.25rem] text-2xl font-bold'>
-              Login Page
+              Create a new account
             </h3>
           </div>
           <div className=''>
@@ -82,30 +88,51 @@ export default function SignIn() {
               onSubmit={handleSubmit}
               className='flex flex-col gap-2 sm:px-[2.2rem]'>
               <div className=''>
-                <label className=' font-semibold text-[#687a72]'>Email</label>
+                <label className=' font-semibold text-[#687a72]'>
+                  Matric Number
+                </label>
                 <div
                   className=' w-full mt-1.5 bg-[#ddebe0] flex 
-              gap-3 items-center p-2 py-3  shadow rounded-lg'>
-                  <HiOutlineMail size={23} className=' text-[#a1998a]' />
+              gap-3 items-center p-2 py-2.5  shadow rounded-lg'>
+                  <HiOutlineUserCircle size={23} className=' text-[#a1998a]' />
                   <input
                     type='text '
                     id='matricNumber'
                     // value={formData.email}
                     className='w-full text-[#a1998a] border-none bg-transparent 
             placeholder:text-[#a1998a] placeholder:font-medium
-          focus:outline-none'
+          focus:outline-none uppercase placeholder:capitalize font-semibold '
                     placeholder='Matric Number'
                     onChange={handleChange}
                   />
                 </div>
               </div>
               <div className=''>
+                <label className=' font-semibold text-[#687a72]'>Email</label>
+                <div
+                  className=' w-full mt-1.5 bg-[#ddebe0] flex 
+              gap-3 items-center p-2 py-2.5  shadow rounded-lg'>
+                  <HiOutlineMail size={23} className=' text-[#a1998a]' />
+                  <input
+                    type='email '
+                    id='email'
+                    // value={formData.email}
+                    className='w-full text-[#a1998a] border-none bg-transparent 
+            placeholder:text-[#a1998a] placeholder:font-medium font-semibold
+          focus:outline-none'
+                    placeholder='Email'
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+
+              <div className=''>
                 <label className=' font-semibold text-[#687a72]'>
                   Password
                 </label>
                 <div
                   className=' w-full mt-1.5 bg-[#ddebe0] flex 
-              gap-3 items-center p-2 py-3  shadow rounded-lg'>
+              gap-3 items-center p-2 py-2.5  shadow rounded-lg'>
                   <HiOutlineLockClosed
                     size={23}
                     className=' 
@@ -114,7 +141,7 @@ export default function SignIn() {
                   <input
                     type='password'
                     className='w-full border-none bg-transparent
-                  text-[#a1998a] 
+                  text-[#a1998a]  
             placeholder:text-[#a1998a] placeholder:font-medium
           focus:outline-none'
                     placeholder='Password'
@@ -131,7 +158,11 @@ export default function SignIn() {
             text-white rounded-lg font-medium shadow'
                 type='submit'
                 disabled={showLoading}>
-                {showLoading ? <span>Processing...</span> : "  Login"}
+                {showLoading ? (
+                  <span> Creating Account... </span>
+                ) : (
+                  "  Create Account"
+                )}
               </button>
             </form>
             {errorMessage && (

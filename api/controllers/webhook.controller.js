@@ -18,6 +18,7 @@ export const webHook = async (req, res, next) => {
   if (event.event === "charge.success") {
     const data = event.data;
     const email = data.metadata?.email;
+    const userId = data.metadata?.userId;
     const ref = data.reference;
     const amount = data.amount / 100;
     const itemId = data.metadata?.itemId;
@@ -26,10 +27,10 @@ export const webHook = async (req, res, next) => {
       //   const user = await User.findOne({ email });
       //   const item = await Item.findById(itemId);
       await Payment.create({
-        userId: email,
-        //   : user?._id,
+        userId: userId,
+        email: email,
         itemId: itemId,
-        //   : item?._id,
+
         amount,
         reference: ref,
         status: data.status,

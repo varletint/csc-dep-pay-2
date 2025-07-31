@@ -4,24 +4,29 @@ import { HiOutlineExclamationCircle, HiPencil } from "react-icons/hi";
 import RecentTransactions from "./Dashboard/RecentTransactions";
 import Paystack from "@paystack/inline-js";
 import { AnimatePresence, motion } from "framer-motion";
+import { useSelector } from "react-redux";
 
 import img1 from "../assets/images/ibbul-img.webp";
 
 export default function DashProfile() {
-  const currentUser = {
-    user: "Adam Abduljalil",
-    email: "adam@gmail.com",
-    matricNumber: "U22/fns/csc/2131",
-  };
+  // const currentUser = {
+  //   user: "Adam Abduljalil",
+  //   email: "adam@gmail.com",
+  //   matricNumber: "U22/fns/csc/2131",
+  // };
+
+  const { currentUser } = useSelector((state) => state.user);
   const [isLoading, setIsLoading] = useState(false);
 
   const [items, setItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [PaymentData, setPaymentData] = useState({
-    email: currentUser.matricNumber + "@gmail.com",
-    // amount: selectedItem.price * 100,
-  });
+  // const [PaymentData, setPaymentData] = useState({
+  //   email: currentUser.matricNumber + "@gmail.com",
+  //   // amount: selectedItem.price * 100,
+  // });
   const [showModal, setShowModal] = useState(false);
+
+  console.log(currentUser.role);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -47,11 +52,12 @@ export default function DashProfile() {
 
     popup.newTransaction({
       key: "pk_test_824b1c362014734e6d55e5e719c2cbd0ae40d361",
-      email: PaymentData.email,
+      email: currentUser.email,
       amount: Number(selectedItem.price) * 100,
       metadata: {
         itemId: selectedItem._id,
-        email: PaymentData.email,
+        email: currentUser.email,
+        userId: currentUser._id,
       },
       callback: async function (response) {
         alert("Payment complete! Reference: " + response.reference);
@@ -131,14 +137,14 @@ export default function DashProfile() {
         </div>
         <div className='profile-details mt-10 md:gap-8 flex sm:justify-center justify-between'>
           <div className=' name'>
-            <h1 className=' font-medium text-nowrap capitalize'>
-              {currentUser.user}
+            <h1 className=' font-medium text-nowrap uppercase'>
+              {currentUser.matricNumber}
             </h1>
             <p className=' font-medium mt-2'>Computer Science</p>
             <p
               className=' font-medium text-black/50
           uppercase text-nowrap'>
-              {currentUser.matricNumber}
+              {/* {currentUser.matricNumber} */}
             </p>
           </div>
           <HiPencil size='20' />
@@ -220,9 +226,12 @@ export default function DashProfile() {
                   {/* <h3 className=' text-gray-400 mb-5  '>
                     Are you sure want to you buy
                   </h3> */}
-                  <h3 className='text-gray-400 mb-5'>
-                    Are you sure you want to buy{" "}
-                    <strong>{selectedItem?.itemName}</strong> for{" "}
+                  <h3 className='text-gray-400 mb-5 px-2'>
+                    Are you sure you want to pay for <br />
+                    <strong className=' capitalize'>
+                      {selectedItem?.itemName}
+                    </strong>{" "}
+                    for{" "}
                     <strong>
                       {new Intl.NumberFormat("en-NG", {
                         style: "currency",

@@ -7,15 +7,15 @@ import bcryptjs from "bcryptjs";
 dotenv.config();
 
 export const signUp = async (req, res, next) => {
-  const { username, email, password } = req.body;
+  const { matricNumber, email, password } = req.body;
 
   if (
-    !username ||
+    !matricNumber ||
     !email ||
     !password ||
     email === "" ||
     password === "" ||
-    username === ""
+    matricNumber === ""
   ) {
     next(errorHandler(400, "All field are required"));
   }
@@ -24,31 +24,52 @@ export const signUp = async (req, res, next) => {
     next(errorHandler(400, "Password must be at least 6 character"));
   }
 
-  const hashedPassword = bcryptjs.hashSync(password, 10);
-
-  const newUser = new UserTwo({
-    username,
-    email,
-    password: hashedPassword,
-  });
-
   try {
-    await newUser.save();
-    res.json("Sign Up successful");
-  } catch (error) {
-    next(error);
+    const existingUser = await UserTwo.findOne({ matricNumber });
+    if (existingUser) return next(errorHandler(400, "User already exist"));
+
+    const hashedPassword = bcryptjs.hashSync(password, 10);
+
+    const newUser = new UserTwo({
+      matricNumber,
+      email,
+      password: hashedPassword,
+      role: "admin",
+    });
+    const savedUser = await newUser.save();
+
+    n;
+    const token = jwt.sign(
+      {
+        id: savedUser._id,
+        role: savedUser.role,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "3d" }
+    );
+
+    const { password: pass, ...rest } = savedUser._doc;
+
+    res
+      .status(201)
+      .cookie("access_token", token, {
+        httpOnly: true,
+      })
+      .json({ ...rest, role: savedUser.role });
+  } catch (err) {
+    next(err);
   }
 };
 
 export const signIn = async (req, res, next) => {
-  const { password, email } = req.body;
+  const { password, matricNumber } = req.body;
 
-  if (!email || !password || email === "" || password === "") {
+  if (!matricNumber || !password || matricNumber === "" || password === "") {
     next(errorHandler(400, "All field are required"));
   }
 
   try {
-    const validUser = await UserTwo.findOne({ email });
+    const validUser = await UserTwo.findOne({ matricNumber });
     if (!validUser) return next(errorHandler(400, "Invalid credentials"));
 
     const validPassword = bcryptjs.compareSync(password, validUser.password);
@@ -57,9 +78,12 @@ export const signIn = async (req, res, next) => {
     const token = jwt.sign(
       {
         id: validUser._id,
-        isAdmin: validPassword.isAdmin,
+        role: validUser.role,
       },
-      process.env.JWT_SECRET
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "2d",
+      }
     );
     const { password: pass, ...rest } = validUser._doc;
 
@@ -68,7 +92,7 @@ export const signIn = async (req, res, next) => {
       .cookie("access_token", token, {
         httpOnly: true,
       })
-      .json(rest);
+      .json({ rest, role: validUser.role });
   } catch (error) {
     next(error);
   }

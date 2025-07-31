@@ -19,8 +19,10 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import CreateItem from "../CreateItem";
 import PaymentModal from "../PaymentModal";
+import { useSelector } from "react-redux";
 
 export default function RouteSelect() {
+  const { currentUser } = useSelector((state) => state.user);
   const [isOpen, setIsOpen] = useState(false);
   const [tab, setTab] = useState("");
   const location = useLocation();
@@ -42,18 +44,31 @@ export default function RouteSelect() {
           selected={tab === "profile" ? true : false}
           to='/dashboard?tab=profile'
         />
-        <Route
-          title='Overview'
-          Icon={tab === "overview" ? <HiViewBoards /> : <HiOutlineViewBoards />}
-          selected={tab === "overview" ? true : false}
-          to='/dashboard?tab=overview'
-        />
-        <Route
-          title='Paid Studedent'
-          Icon={<FaList />}
-          selected={tab === "paid-students" ? true : false}
-          to='/dashboard?tab=paid-students'
-        />
+        {currentUser.isAdmin && (
+          <>
+            <Route
+              title='Overview'
+              Icon={
+                tab === "overview" ? <HiViewBoards /> : <HiOutlineViewBoards />
+              }
+              selected={tab === "overview" ? true : false}
+              to='/dashboard?tab=overview'
+            />
+
+            <Route
+              title='Paid Students'
+              Icon={<FaList />}
+              selected={tab === "paid-students" ? true : false}
+              to='/dashboard?tab=paid-students'
+            />
+            <div
+              onClick={() => {
+                setIsOpen(!isOpen);
+              }}>
+              <Route Icon={<FaPlus />} title='Add Transactions' />
+            </div>
+          </>
+        )}
         {/* <Route Icon={<FaReceipt />} title='Payments' /> */}
         <Route
           title='Transactions'
@@ -62,12 +77,7 @@ export default function RouteSelect() {
           to='/dashboard?tab=transactions'
         />
         {/* <Link to={"/create-item"}> */}
-        <div
-          onClick={() => {
-            setIsOpen(!isOpen);
-          }}>
-          <Route Icon={<FaPlus />} title='Add Transactions' />
-        </div>
+
         {/* </Link> */}
       </div>
       <AnimatePresence initial={false}>

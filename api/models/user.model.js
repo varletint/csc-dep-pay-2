@@ -2,10 +2,14 @@ import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema(
   {
-    username: {
+    // username: {
+    //   type: String,
+    //   required: true,
+    //   unique: true,
+    // },
+    name: {
       type: String,
-      required: true,
-      unique: true,
+      // required: true,
     },
     email: {
       type: String,
@@ -16,22 +20,17 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    isAdmin: {
-      type: Boolean,
-      default: false,
-    },
-    isStudent: {
-      type: Boolean,
-      default: false,
+    role: {
+      type: String,
+      enum: ["admin", "student"],
+      default: "student",
     },
     matricNumber: {
       type: String,
-      required: false,
-    },
-    fullName: {
-      type: String,
+      unique: true,
       required: true,
     },
+
     //
   },
   {
