@@ -23,6 +23,7 @@ export const webHook = async (req, res, next) => {
     const amount = data.amount / 100;
     const itemId = data.metadata?.itemId;
     const matricNumber = data.metadata?.matricNumber;
+    const itemName = data.metadata?.itemName;
 
     try {
       //   const user = await User.findOne({ email });
@@ -32,6 +33,7 @@ export const webHook = async (req, res, next) => {
         email: email,
         itemId: itemId,
         matricNumber: matricNumber,
+        itemName: itemName,
         amount,
         reference: ref,
         status: data.status,
