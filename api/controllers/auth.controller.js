@@ -7,15 +7,17 @@ import bcryptjs from "bcryptjs";
 dotenv.config();
 
 export const signUp = async (req, res, next) => {
-  const { matricNumber, email, password } = req.body;
+  const { matricNumber, name, email, password } = req.body;
 
   if (
     !matricNumber ||
+    !name ||
     !email ||
     !password ||
     email === "" ||
     password === "" ||
-    matricNumber === ""
+    matricNumber === "" ||
+    name === ""
   ) {
     next(errorHandler(400, "All field are required"));
   }
@@ -33,12 +35,12 @@ export const signUp = async (req, res, next) => {
     const newUser = new UserTwo({
       matricNumber,
       email,
+      name,
       password: hashedPassword,
       role: "student",
     });
     const savedUser = await newUser.save();
 
-    n;
     const token = jwt.sign(
       {
         id: savedUser._id,

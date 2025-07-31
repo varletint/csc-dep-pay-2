@@ -126,14 +126,20 @@ export default function DashProfile() {
         </div>
         <div className='profile-details mt-10 md:gap-8 flex sm:justify-center justify-between'>
           <div className=' name'>
+            <p
+              className=' font-semibold text-black/50
+          uppercase text-[.71rem] mb-2 bg-green-200 w-fit
+          p-1.5 rounded-md text-green-700 text-nowrap'>
+              {currentUser.role}
+            </p>
             <h1 className=' font-medium text-nowrap uppercase'>
-              {currentUser.matricNumber}
+              {currentUser.name}
             </h1>
             <p className=' font-medium mt-2'>Computer Science</p>
             <p
               className=' font-medium text-black/50
           uppercase text-nowrap'>
-              {/* {currentUser.matricNumber} */}
+              {currentUser.matricNumber}
             </p>
           </div>
           <HiPencil size='20' />

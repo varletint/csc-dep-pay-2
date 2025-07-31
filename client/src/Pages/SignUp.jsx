@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { FaLock } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import {
+  HiIdentification,
+  HiOutlineIdentification,
   HiOutlineLockClosed,
   HiOutlineMail,
   HiOutlineUserCircle,
@@ -94,7 +96,10 @@ export default function SignUp() {
                 <div
                   className=' w-full mt-1.5 bg-[#ddebe0] flex 
               gap-3 items-center p-2 py-2.5  shadow rounded-lg'>
-                  <HiOutlineUserCircle size={23} className=' text-[#a1998a]' />
+                  <HiOutlineIdentification
+                    size={23}
+                    className=' text-[#a1998a]'
+                  />
                   <input
                     type='text '
                     id='matricNumber'
@@ -103,6 +108,26 @@ export default function SignUp() {
             placeholder:text-[#a1998a] placeholder:font-medium
           focus:outline-none uppercase placeholder:capitalize font-semibold '
                     placeholder='Matric Number'
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+              <div className=''>
+                <label className=' font-semibold text-[#687a72]'>
+                  Fullname
+                </label>
+                <div
+                  className=' w-full mt-1.5 bg-[#ddebe0] flex 
+              gap-3 items-center p-2 py-2.5  shadow rounded-lg'>
+                  <HiOutlineUserCircle size={23} className=' text-[#a1998a]' />
+                  <input
+                    type='text '
+                    id='name'
+                    // value={formData.email}
+                    className='w-full text-[#a1998a] border-none bg-transparent 
+            placeholder:text-[#a1998a] placeholder:font-medium
+          focus:outline-none  capitalize font-semibold '
+                    placeholder='Fullname'
                     onChange={handleChange}
                   />
                 </div>
