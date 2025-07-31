@@ -4,19 +4,28 @@ import { useSelector } from "react-redux";
 export default function DashTransactions() {
   const { currentUser } = useSelector((state) => state.user);
   const [userPurchasedItems, setUserPurchasedItems] = useState([]);
-  console.log(userPurchasedItems);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const fetchUserItems = async () => {
+      setIsLoading(true);
       const res = await fetch(`/api/item/purchased-items/${currentUser._id}`);
       const data = await res.json();
       if (!res.ok) {
+        setIsLoading(false);
         alert(data.message);
         return;
       }
+      setIsLoading(false);
       setUserPurchasedItems(data);
     };
     fetchUserItems();
   }, []);
+  if (isLoading)
+    return (
+      <a className=' flex justify-center mt-10 min-h-screen text-lg '>
+        Loading...
+      </a>
+    );
   return (
     <div className='bg-white rounded-lg pt-4 min-h-[100vh] shadow '>
       <div className=' gap-3 px-4 grid'>

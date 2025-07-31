@@ -44,7 +44,7 @@ export default function RouteSelect() {
           selected={tab === "profile" ? true : false}
           to='/dashboard?tab=profile'
         />
-        {currentUser.isAdmin && (
+        {currentUser.role === "admin" && (
           <>
             <Route
               title='Overview'

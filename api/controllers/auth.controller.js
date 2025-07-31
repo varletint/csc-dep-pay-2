@@ -34,7 +34,7 @@ export const signUp = async (req, res, next) => {
       matricNumber,
       email,
       password: hashedPassword,
-      role: "admin",
+      role: "student",
     });
     const savedUser = await newUser.save();
 
