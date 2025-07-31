@@ -92,7 +92,7 @@ export const signIn = async (req, res, next) => {
       .cookie("access_token", token, {
         httpOnly: true,
       })
-      .json({ rest, role: validUser.role });
+      .json({ ...rest, role: validUser.role });
   } catch (error) {
     next(error);
   }
