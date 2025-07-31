@@ -47,7 +47,7 @@ export default function DashTransactions() {
               See all
             </button>
           </div>
-          <table className=' w-full table-auto'>
+          <table className=' w-full table-row'>
             <TableHead />
             <tbody>
               {/* <TableRow
@@ -65,7 +65,6 @@ export default function DashTransactions() {
                       key={item._id}
                       matric={item.matricNumber}
                       item={item.itemName}
-                      // category={item.category}
                       amount={new Intl.NumberFormat("en-NG", {
                         style: "currency",
                         currency: "NGN",
@@ -91,12 +90,12 @@ export default function DashTransactions() {
 const TableHead = () => {
   return (
     <thead>
-      <tr className=' text-sm font-normal text-stone-500'>
+      <tr className=' text-sm font-normal bg-gray-100 text-stone-500'>
         <th className='text-start p-1.5 '>Matric NO</th>
         <th className='text-start p-1.5 '>Item</th>
-        {/* <th className='text-start p-1.5 '>Category</th> */}
         <th className='text-start p-1.5'>Date</th>
         <th className='text-start p-1.5'>Amount</th>
+        {/* <th className='text-start p-1.5 '>Category</th> */}
         <th className='w-8'></th>
       </tr>
     </thead>
@@ -108,7 +107,7 @@ const TableRow = ({ matric, category, date, amount, item }) => {
     <tr className='text-[0.73rem] font-medium text-stone-700'>
       <td className='p-1.5 uppercase whitespace-nowrap'>{matric}</td>
       <td className='p-1.5 capitalize whitespace-nowrap'>{item}</td>
-      <td className='p-1.5 capitalize whitespace-nowrap'>{category}</td>
+      {/* <td className='p-1.5 capitalize whitespace-nowrap'>{category}</td> */}
       <td className='p-1.5 whitespace-nowrap'>{date}</td>
       <td className='p-1.5'>
         {" "}

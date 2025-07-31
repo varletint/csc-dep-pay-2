@@ -34,7 +34,7 @@ export default function SignIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.email || !formData.password) {
+    if (!formData.matricNumber || !formData.password) {
       return dispatch(signInFailure("Fields cannot be empty"));
     }
 
@@ -82,7 +82,9 @@ export default function SignIn() {
               onSubmit={handleSubmit}
               className='flex flex-col gap-2 sm:px-[2.2rem]'>
               <div className=''>
-                <label className=' font-semibold text-[#687a72]'>Email</label>
+                <label className=' font-semibold text-[#687a72]'>
+                  Matric Number
+                </label>
                 <div
                   className=' w-full mt-1.5 bg-[#ddebe0] flex 
               gap-3 items-center p-2 py-3  shadow rounded-lg'>
