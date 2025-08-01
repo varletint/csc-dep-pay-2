@@ -248,7 +248,7 @@ export default function DashProfile() {
 
                   <div className=' flex  justify-center gap-4'>
                     <button
-                      className=' bg-green-600/90 p-3 px-5  font-semibold rounded-lg
+                      className=' bg-green-600/90 p-3 px-10  font-semibold rounded-lg
                 text-white shadow hover:bg-green-600/100
                 transition-[boxshadow,_background-color_color]
                  disabled:bg-green-600/60 disabled:cursor-not-allowed
