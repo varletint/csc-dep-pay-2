@@ -71,25 +71,20 @@ const Header = () => {
         shadow items-center border-b- z-[101] px-6
          lg:px-[em] md:px-[3rem]'>
           <div
-            className=' flex justify-between w-full bg-white min-h-[10vh] 
-        items-center border-b- z-[101] px-6
-         '>
-            <div
-              //   className='logo font-semibold sm:text-3xl text-2xl bg-white sm:py-0
-              // sm:px-0 px-6 py-2  sm:shadow-none shadow rounded-2xl'
-              className='text-3xl font-semibold'>
-              Logo
-            </div>
-            <div className='nav-links  sm:block hidden '>
-              <NavItems />
-            </div>
+            //   className='logo font-semibold sm:text-3xl text-2xl bg-white sm:py-0
+            // sm:px-0 px-6 py-2  sm:shadow-none shadow rounded-2xl'
+            className='text-3xl font-semibold'>
+            Logo
           </div>
-          <Link
-            to='/login'
-            className=' bg-[#3e5a4e] font-medium
+          <div className='nav-links items-center lg:gap-20 gap-10 hidden sm:flex '>
+            <NavItems />
+            <Link
+              to='/login'
+              className=' bg-[#3e5a4e] font-medium
           py-2 px-5 text-white rounded-md'>
-            Login
-          </Link>
+              Login
+            </Link>
+          </div>
         </div>
       </nav>
       <nav className='mobile-nav sm:hidden z-[10000] shadow-md '>
