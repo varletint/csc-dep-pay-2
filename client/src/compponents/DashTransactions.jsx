@@ -54,7 +54,6 @@ export default function DashTransactions() {
             <tbody>
               {!isLoading && userPurchasedItems.length === 0 && (
                 <p className=' text-l text-red-500'>
-                  {" "}
                   No trasactions have been made yet
                 </p>
               )}
