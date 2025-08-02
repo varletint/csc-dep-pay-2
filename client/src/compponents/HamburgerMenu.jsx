@@ -7,7 +7,6 @@ const HamburgerMenu = () => {
 
   return (
     <div className='relative z-[9999]'>
-      {/* Hamburger Icon */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className='flex flex-col justify-center
@@ -26,52 +25,57 @@ const HamburgerMenu = () => {
         />
       </button>
 
-      {/* Slide Menu */}
       <div
         className='absolute top-[100%] right-0 
         '>
         <AnimatePresence initial={false}>
           <motion.div
-            // initial={{ y: "100%" }}
-            // animate={{ y: isOpen ? "0%" : "100%" }}
-            // className='fixed top-0 right-0 w-64 h-screen bg-white
-            // shadow-lg p-6 flex flex-col space-y-4 z-10'
-
             className='  bg-white shadow-md rounded-lg
       
         '
             initial={{
-              // height: false,
               width: false,
               opacity: 0,
             }}
             animate={{
-              // height: isOpen ? "" : 0,
               width: isOpen ? "" : 0,
               opacity: isOpen ? 1 : 0,
             }}
-            // transition={ { duration: 0.2 } }
             exit={{ width: 0, opacity: 0 }}>
             <nav
-              className={`mt-1 space-y-6 text-lg font-medium list-none 
-         px-10 py-4 ${isOpen ? "flex flex-col" : "hidden"}`}>
-              <a href='#home' className=''>
+              className={`mt-1 space-y-2 text w-[150px] font-medium list-none  
+         py-2 ${isOpen ? "flex flex-col" : "hidden"} ]`}>
+              <a
+                href='#home'
+                className='hover:bg-gray-50 px-3 py-2
+                transition-[box-shadow,_background-color_color]
+               w-full'>
                 Home
               </a>
-              <a href='#prices' className=''>
+              <a
+                href='#prices'
+                className='hover:bg-gray-50 px-3 py-2
+                transition-[box-shadow,_background-color_color]
+               w-full'>
                 Price
               </a>
-              <a href='#verify' className=''>
+              <a
+                href='#verify'
+                className=' hover:bg-gray-50 px-3 py-2
+                transition-[box-shadow,_background-color_color]
+               w-full'>
                 Verify
               </a>
-              <a href='#exchange' className=''>
-                Exchange
-              </a>
-              <a href='#contact' className=''>
-                Contact
-              </a>
-              <Link to='/dashboard?tab=overview' className=''>
-                Dashboard
+
+              {/* <a href='#contact' className=''>
+                Contact us
+              </a> */}
+              <Link
+                to='/dashboard?tab=profile'
+                className='hover:bg-gray-50 px-3 py-2
+                transition-[box-shadow,_background-color_color]
+               w-full'>
+                Login
               </Link>
             </nav>
           </motion.div>

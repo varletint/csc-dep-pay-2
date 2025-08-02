@@ -69,16 +69,27 @@ const Header = () => {
         <div
           className=' flex justify-between w-full bg-white min-h-[10vh] 
         shadow items-center border-b- z-[101] px-6
-         lg:px-[10rem] md:px-[3rem]'>
+         lg:px-[em] md:px-[3rem]'>
           <div
-            //   className='logo font-semibold sm:text-3xl text-2xl bg-white sm:py-0
-            // sm:px-0 px-6 py-2  sm:shadow-none shadow rounded-2xl'
-            className='text-3xl font-semibold'>
-            Logo
+            className=' flex justify-between w-full bg-white min-h-[10vh] 
+        items-center border-b- z-[101] px-6
+         '>
+            <div
+              //   className='logo font-semibold sm:text-3xl text-2xl bg-white sm:py-0
+              // sm:px-0 px-6 py-2  sm:shadow-none shadow rounded-2xl'
+              className='text-3xl font-semibold'>
+              Logo
+            </div>
+            <div className='nav-links  sm:block hidden '>
+              <NavItems />
+            </div>
           </div>
-          <div className='nav-links  sm:block hidden '>
-            <NavItems />
-          </div>
+          <Link
+            to='/login'
+            className=' bg-[#3e5a4e] font-medium
+          py-2 px-5 text-white rounded-md'>
+            Login
+          </Link>
         </div>
       </nav>
       <nav className='mobile-nav sm:hidden z-[10000] shadow-md '>
@@ -91,44 +102,6 @@ const Header = () => {
             {/* <HiMenu size={30} onClick={() => setOpen("open")} /> */}
             {/* <MobileNavItems /> */}
             <HamburgerMenu />
-            <div
-              className={`list-none absolute z-[102] right-0 top-[100%]
-      w-fit bg-white overflow-hidden transition-all 
-      shadow-md rounded-xl hidden flex-col px-[2rem] gap-[1.5rem] py-6
-      font-medium text-[1.1rem] 
-      duration-[1s] ease-in-out menu-links ${open}
-     `}>
-              <li>
-                <a
-                  href='#home '
-                  //   className='{sm:px-0 px-4 bg-white/ rounded-2xl
-                  // sm:shadow-none shadow py-1}'
-                  className='  '
-                  onClick={() => setOpen("")}>
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href='#prices' className='' onClick={() => setOpen("")}>
-                  Price
-                </a>
-              </li>
-              <li>
-                <a href='#verify' className='' onClick={() => setOpen("")}>
-                  Verify
-                </a>
-              </li>
-              <li>
-                <a href='#exchange' className='' onClick={() => setOpen("")}>
-                  Exchange
-                </a>
-              </li>
-              <li>
-                <a href='#contact' className='' onClick={() => setOpen("")}>
-                  Contact
-                </a>
-              </li>
-            </div>
           </div>
         </div>
       </nav>
@@ -196,19 +169,14 @@ const NavItems = () => {
           Price
         </a>
       </li>
-      <li>
+      {/* <li>
         <a href='#verify' className=''>
           Verify
         </a>
-      </li>
+      </li> */}
       <li>
         <a href='#exchange' className=''>
-          Exchange
-        </a>
-      </li>
-      <li>
-        <a href='#contact' className=''>
-          Contact
+          Contact us
         </a>
       </li>
     </ul>
