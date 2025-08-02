@@ -28,8 +28,6 @@ export default function SignUp() {
 
   document.title = "Login page";
 
-  console.log(formData);
-
   if (errorMessage) {
     setTimeout(() => {
       dispatch(clearError());
@@ -94,7 +92,8 @@ export default function SignUp() {
                   Matric Number
                 </label>
                 <div
-                  className=' w-full mt-1.5 bg-[#ddebe0] flex 
+                  className=' w-full mt-1.5  
+                  border border-[#3e5a4e] flex 
               gap-3 items-center p-2 py-2.5  shadow rounded-lg'>
                   <HiOutlineIdentification
                     size={23}
@@ -117,7 +116,8 @@ export default function SignUp() {
                   Fullname
                 </label>
                 <div
-                  className=' w-full mt-1.5 bg-[#ddebe0] flex 
+                  className=' w-full mt-1.5 border border-[#3e5a4e]
+                   flex 
               gap-3 items-center p-2 py-2.5  shadow rounded-lg'>
                   <HiOutlineUserCircle size={23} className=' text-[#a1998a]' />
                   <input
@@ -135,8 +135,9 @@ export default function SignUp() {
               <div className=''>
                 <label className=' font-semibold text-[#687a72]'>Email</label>
                 <div
-                  className=' w-full mt-1.5 bg-[#ddebe0] flex 
-              gap-3 items-center p-2 py-2.5  shadow rounded-lg'>
+                  className=' w-full mt-1.5 bg-[] flex 
+              gap-3 items-center p-2 py-2.5  shadow rounded-lg
+              border border-[#3e5a4e]'>
                   <HiOutlineMail size={23} className=' text-[#a1998a]' />
                   <input
                     type='email '
@@ -156,7 +157,7 @@ export default function SignUp() {
                   Password
                 </label>
                 <div
-                  className=' w-full mt-1.5 bg-[#ddebe0] flex 
+                  className=' w-full mt-1.5 border border-[#3e5a4e] flex 
               gap-3 items-center p-2 py-2.5  shadow rounded-lg'>
                   <HiOutlineLockClosed
                     size={23}
@@ -177,8 +178,8 @@ export default function SignUp() {
               </div>
 
               <button
-                className='bg-[#0d9488] 
-                disabled:bg-[#0d9488]/75
+                className='bg-[#3e5a4e] 
+                disabled:bg-[#3e5a4e]/75
                  p-2 mt-6 disabled:cursor-not-allowed
             text-white rounded-lg font-medium shadow'
                 type='submit'

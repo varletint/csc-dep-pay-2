@@ -54,7 +54,7 @@ export default function DashTransactions() {
             <TableHead />
             <tbody>
               {!isLoading && userPurchasedItems.length === 0 && (
-                <p className=' text-l text-red-500'>
+                <p className=' text-sm text-red-500'>
                   No trasactions have been made yet
                 </p>
               )}
@@ -77,7 +77,7 @@ export default function DashTransactions() {
                     />
                   ) : (
                     <p key={"no item"}>
-                      You have <strong>purchased any item</strong>
+                      You have not <strong>purchased any item</strong>
                     </p>
                   )
                 )}

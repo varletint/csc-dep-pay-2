@@ -86,13 +86,13 @@ export default function SignIn() {
                   Matric Number
                 </label>
                 <div
-                  className=' w-full mt-1.5 bg-[#ddebe0] flex 
-              gap-3 items-center p-2 py-3  shadow rounded-lg'>
+                  className=' w-full mt-1.5 bg-[#ddebe0]/ border
+                   border-[#56bd90] flex lowercase
+              gap-3 items-center p-2 py-2.5   :shadow-2xl rounded-lg'>
                   <HiOutlineMail size={23} className=' text-[#a1998a]' />
                   <input
                     type='text '
                     id='matricNumber'
-                    // value={formData.email}
                     className='w-full text-[#a1998a] border-none bg-transparent 
             placeholder:text-[#a1998a] placeholder:font-medium
           focus:outline-none'
@@ -106,8 +106,9 @@ export default function SignIn() {
                   Password
                 </label>
                 <div
-                  className=' w-full mt-1.5 bg-[#ddebe0] flex 
-              gap-3 items-center p-2 py-3  shadow rounded-lg'>
+                  className=' w-full mt-1.5 border
+                   border-[#56bd90] flex 
+              gap-3 items-center p-2 py-2.5  shado rounded-lg'>
                   <HiOutlineLockClosed
                     size={23}
                     className=' 
@@ -127,15 +128,15 @@ export default function SignIn() {
               </div>
 
               <button
-                className='bg-[#0d9488] 
-                disabled:bg-[#0d9488]/75
+                className='bg-[#3e5a4e] 
+                disabled:bg-[#3e5a4e]/75
                  p-2 mt-6 disabled:cursor-not-allowed
             text-white rounded-lg font-medium shadow'
                 type='submit'
                 disabled={showLoading}>
                 {showLoading ? <span>Processing...</span> : "  Login"}
               </button>
-              <p className='text-center text-sm text-[#687a72]'>
+              <p className='text-center text-sm text-[#3e5a4e]'>
                 Don't have an account?{" "}
                 <Link
                   to='/register'
