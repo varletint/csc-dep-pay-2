@@ -5,12 +5,12 @@ import SearchInput from "./SearchInput";
 
 export default function Sidebar() {
   return (
-    <div className='z-10 shadow-lg'>
+    <div className='z-10 shadow-lg '>
       <div
         className=' overflow-y-scroll sticky top-4 
       lg:h-[calc(100vh-32px-49px)] md:h-[calc(100vh-32px-49px)]
       sm:h-[calc(100vh-32px-49px)]
-       border- '>
+       border- -z-10 '>
         <AccountToggle />
         <SearchInput />
         <RouteSelect />

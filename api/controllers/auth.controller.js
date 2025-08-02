@@ -99,3 +99,14 @@ export const signIn = async (req, res, next) => {
     next(error);
   }
 };
+
+export const logout = async (req, res, next) => {
+  try {
+    res
+      .clearCookie("access_token")
+      .status(200)
+      .json({ message: "You have succesful logout" });
+  } catch (error) {
+    next(error);
+  }
+};

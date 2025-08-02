@@ -84,7 +84,6 @@ const Header = () => {
           py-2 px-5 text-white rounded-md'>
               Login
             </Link>
-            {/*  */}
           </div>
         </div>
       </nav>
@@ -165,13 +164,8 @@ const NavItems = () => {
           Price
         </a>
       </li>
-      {/* <li>
-        <a href='#verify' className=''>
-          Verify
-        </a>
-      </li> */}
       <li>
-        <a href='#exchange' className=''>
+        <a href='#contact' className=''>
           Contact us
         </a>
       </li>

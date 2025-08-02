@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function AccountToggle() {
   // const { currentUser } = useSelector((state) => state.user);
   return (
-    <div className='border-b mb-4 mt-2 pb-4 border-[#ddebe0]'>
+    <div className='border-b mb-4 mt-2 pb-4 border-[#ddebe0] '>
       <button
         className='
           flex p-0.5 hover:bg-[#ddebe0/]
