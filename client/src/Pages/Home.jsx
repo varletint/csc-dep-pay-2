@@ -400,14 +400,12 @@ const PriceCard = ({
           <h1 className=' text-2xl font-bold'>₦{billPrice}</h1>
           <p className=' font-medium text-[.78rem] text-[#3e5a4e]'>{perPay}</p>
         </div>
-        <div
-          className=' bg-[#3e5a4e] py-2 font-semibold 
-          text-white text-center mt-5 shadow-md
-        rounded-xl'>
-          <Link to={`/pay/${slug}`} className='w-full h-full'>
-            Get your Card
-          </Link>
-        </div>
+        <button
+          className=' bg-[#3e5a4e] w-full py-2 font-semibold 
+          text-white text-center mt-5 shadow
+        rounded-md cursor-default'>
+          Get your Card
+        </button>
         <div className=' mt-5'>
           <ul
             className=' text-xs flex flex-col gap-2 font-medium
