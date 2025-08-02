@@ -24,12 +24,14 @@ export const webHook = async (req, res, next) => {
     const itemId = data.metadata?.itemId;
     const matricNumber = data.metadata?.matricNumber;
     const itemName = data.metadata?.itemName;
+    const userName = data.metadata?.userName;
 
     try {
       await Payment.create({
         userId: userId,
         email: email,
         itemId: itemId,
+        studentName: userName,
         matricNumber: matricNumber,
         itemName: itemName,
         amount,

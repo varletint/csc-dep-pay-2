@@ -86,3 +86,14 @@ export const getUserPurchasedItems = async (req, res, next) => {
     next(error);
   }
 };
+export const getUserPurchasedItemsReceipt = async (req, res, next) => {
+  try {
+    const userPurchasedItemsReceipt = await Payment.find({
+      reference: req.params.reference,
+    }).sort({ createdAt: -1 });
+
+    res.status(200).json(userPurchasedItemsReceipt);
+  } catch (error) {
+    next(error);
+  }
+};

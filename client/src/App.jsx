@@ -19,6 +19,7 @@ import Home from "./Pages/Home";
 import { AnimatePresence } from "framer-motion";
 import Pay from "./Pages/Pay";
 import PrivateRoute from "./compponents/PrivateRoute";
+import GenerateReceipt from "./Pages/GenerateReceipt";
 
 function App() {
   return (
@@ -34,13 +35,17 @@ function App() {
             <Route path='/login' element={<SignIn />} />
             <Route path='/test' element={<Testing />} />
             <Route
+              path='/generate_receipt/:reference'
+              element={<GenerateReceipt />}
+            />
+            {/* <Route
               path='/generate-payment-details'
               element={<GeneratePaymentDetails />}
             />
             <Route
               element={<TransanctionVerification />}
               path='/verify/:reference'
-            />
+            /> */}
             <Route
               path='/verify-success/:reference'
               element={<UploadSuccessful />}
