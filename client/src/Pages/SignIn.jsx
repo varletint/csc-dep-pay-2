@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { FaLock } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { HiOutlineLockClosed, HiOutlineMail } from "react-icons/hi";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -12,6 +14,17 @@ import {
 } from "../redux/user/userSlice";
 
 export default function SignIn() {
+  const schema = yup.object().shape({
+    matricNumber: yup.string().required("Please field out this field"),
+    password: yup.string().required("Please field out this field"),
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
   const [formData, setFormData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const { error: errorMessage, loading: showLoading } = useSelector(
@@ -22,22 +35,7 @@ export default function SignIn() {
 
   document.title = "Login page";
 
-  if (errorMessage) {
-    setTimeout(() => {
-      dispatch(clearError());
-    }, 1000);
-  }
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!formData.matricNumber || !formData.password) {
-      return dispatch(signInFailure("Fields cannot be empty"));
-    }
-
+  const onSubmit = async (formData) => {
     try {
       setIsLoading(true);
       dispatch(signInStart());
@@ -65,6 +63,49 @@ export default function SignIn() {
     }
   };
 
+  if (errorMessage) {
+    setTimeout(() => {
+      dispatch(clearError());
+    }, 1000);
+  }
+
+  // const handleChange = (e) => {
+  //   setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (!formData.matricNumber || !formData.password) {
+  //     return dispatch(signInFailure("Fields cannot be empty"));
+  //   }
+
+  //   try {
+  //     setIsLoading(true);
+  //     dispatch(signInStart());
+
+  //     const res = await fetch(`/api/auth/signin`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(formData),
+  //     });
+  //     const data = await res.json();
+
+  //     if (data.success === false) {
+  //       setIsLoading(false);
+  //       return dispatch(signInFailure(data.message));
+  //     }
+  //     if (res.ok) {
+  //       setIsLoading(false);
+  //       dispatch(signInSuccess(data));
+  //       navigate(`/dashboard?tab=profile`);
+  //     }
+  //   } catch (error) {
+  //     dispatch(signInFailure(error.message));
+  //   }
+  // };
+
   return (
     <div className='h-[100vh]'>
       <div
@@ -79,15 +120,22 @@ export default function SignIn() {
           </div>
           <div className=''>
             <form
-              onSubmit={handleSubmit}
+              onSubmit={handleSubmit(onSubmit)}
               className='flex flex-col gap-2 sm:px-[2.2rem]'>
               <div className=''>
-                <label className=' font-semibold text-[#687a72]'>
-                  Matric Number
-                </label>
+                <label
+                  htmlFor='Matric number'
+                  className=' font-semibold text-[#687a72]'>
+                  Matric Number{" "}
+                </label>{" "}
+                <br />
+                <span className=' text-red-500 text-sm'>
+                  {" "}
+                  {errors.matricNumber?.message}
+                </span>
                 <div
                   className=' w-full mt-1.5 bg-[#ddebe0]/ border
-                   border-[#56bd90] flex lowercase
+                   border-[#3e5a4e] flex lowercase
               gap-3 items-center p-2 py-2.5   :shadow-2xl rounded-lg'>
                   <HiOutlineMail size={23} className=' text-[#a1998a]' />
                   <input
@@ -97,7 +145,8 @@ export default function SignIn() {
             placeholder:text-[#a1998a] placeholder:font-medium
           focus:outline-none'
                     placeholder='Matric Number'
-                    onChange={handleChange}
+                    // onChange={handleChange}
+                    {...register("matricNumber")}
                   />
                 </div>
               </div>
@@ -105,9 +154,14 @@ export default function SignIn() {
                 <label className=' font-semibold text-[#687a72]'>
                   Password
                 </label>
+                <br />
+                <span className=' text-red-500 text-sm'>
+                  {" "}
+                  {errors.password?.message}
+                </span>
                 <div
                   className=' w-full mt-1.5 border
-                   border-[#56bd90] flex 
+                   border-[#3e5a4e] flex 
               gap-3 items-center p-2 py-2.5  shado rounded-lg'>
                   <HiOutlineLockClosed
                     size={23}
@@ -122,7 +176,8 @@ export default function SignIn() {
           focus:outline-none'
                     placeholder='Password'
                     id='password'
-                    onChange={handleChange}
+                    {...register("password")}
+                    // onChange={handleChange}
                   />
                 </div>
               </div>
