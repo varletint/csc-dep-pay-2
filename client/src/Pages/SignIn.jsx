@@ -15,8 +15,8 @@ import {
 
 export default function SignIn() {
   const schema = yup.object().shape({
-    matricNumber: yup.string().required("Please field out this field"),
-    password: yup.string().required("Please field out this field"),
+    matricNumber: yup.string().required("Please fill out this field"),
+    password: yup.string().required("Please fill out this field"),
   });
   const {
     register,

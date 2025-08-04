@@ -9,6 +9,10 @@ import {
   HiOutlineUserCircle,
 } from "react-icons/hi";
 
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   signInFailure,
@@ -18,7 +22,23 @@ import {
 } from "../redux/user/userSlice";
 
 export default function SignUp() {
-  const [formData, setFormData] = useState({});
+  const schema = yup.object().shape({
+    name: yup.string().required("This field can't be empty"),
+    password: yup.string().required("This field can't be empty"),
+    email: yup
+      .string()
+      .email("Enter a valid email")
+      .required("This field can't be empty"),
+    matricNumber: yup.string().required("This field can't be empty"),
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+  // const [formData, setFormData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const { error: errorMessage, loading: showLoading } = useSelector(
     (state) => state.user
@@ -28,22 +48,13 @@ export default function SignUp() {
 
   document.title = "Login page";
 
-  if (errorMessage) {
+  if (errorMessage || errors) {
     setTimeout(() => {
       dispatch(clearError());
-    }, 1000);
+    }, 3000);
   }
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!formData.matricNumber || !formData.password) {
-      return dispatch(signInFailure("Fields cannot be empty"));
-    }
-
+  const onSubmit = async (formData) => {
     try {
       setIsLoading(true);
       dispatch(signInStart());
@@ -71,6 +82,43 @@ export default function SignUp() {
     }
   };
 
+  // const handleChange = (e) => {
+  //   setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (!formData.matricNumber || !formData.password) {
+  //     return dispatch(signInFailure("Fields cannot be empty"));
+  //   }
+
+  //   try {
+  //     setIsLoading(true);
+  //     dispatch(signInStart());
+
+  //     const res = await fetch(`/api/auth/signup`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(formData),
+  //     });
+  //     const data = await res.json();
+
+  //     if (data.success === false) {
+  //       setIsLoading(false);
+  //       return dispatch(signInFailure(data.message));
+  //     }
+  //     if (res.ok) {
+  //       setIsLoading(false);
+  //       dispatch(signInSuccess(data));
+  //       navigate(`/login`);
+  //     }
+  //   } catch (error) {
+  //     dispatch(signInFailure(error.message));
+  //   }
+  // };
+
   return (
     <div className='h-[100vh]'>
       <div
@@ -85,12 +133,17 @@ export default function SignUp() {
           </div>
           <div className=''>
             <form
-              onSubmit={handleSubmit}
+              onSubmit={handleSubmit(onSubmit)}
               className='flex flex-col gap-2 sm:px-[2.2rem]'>
               <div className=''>
                 <label className=' font-semibold text-[#687a72]'>
                   Matric Number
                 </label>
+                <br />
+                <span className=' text-red-500 text-sm'>
+                  {" "}
+                  {errors.matricNumber?.message}
+                </span>
                 <div
                   className=' w-full mt-1.5  
                   border border-[#3e5a4e] flex 
@@ -107,7 +160,7 @@ export default function SignUp() {
             placeholder:text-[#a1998a] placeholder:font-medium
           focus:outline-none uppercase placeholder:capitalize font-semibold '
                     placeholder='Matric Number'
-                    onChange={handleChange}
+                    {...register("matricNumber")}
                   />
                 </div>
               </div>
@@ -115,6 +168,11 @@ export default function SignUp() {
                 <label className=' font-semibold text-[#687a72]'>
                   Fullname
                 </label>
+                <br />
+                <span className=' text-red-500 text-sm'>
+                  {" "}
+                  {errors.name?.message}
+                </span>
                 <div
                   className=' w-full mt-1.5 border border-[#3e5a4e]
                    flex 
@@ -128,12 +186,17 @@ export default function SignUp() {
             placeholder:text-[#a1998a] placeholder:font-medium
           focus:outline-none  capitalize font-semibold '
                     placeholder='Fullname'
-                    onChange={handleChange}
+                    {...register("name")}
                   />
                 </div>
               </div>
               <div className=''>
-                <label className=' font-semibold text-[#687a72]'>Email</label>
+                <label className=' font-semibold text-[#687a72]'>Email</label>{" "}
+                <br />
+                <span className=' text-red-500 text-sm'>
+                  {" "}
+                  {errors.email?.message}
+                </span>
                 <div
                   className=' w-full mt-1.5 bg-[] flex 
               gap-3 items-center p-2 py-2.5  shadow rounded-lg
@@ -147,7 +210,7 @@ export default function SignUp() {
             placeholder:text-[#a1998a] placeholder:font-medium font-semibold
           focus:outline-none'
                     placeholder='Email'
-                    onChange={handleChange}
+                    {...register("email")}
                   />
                 </div>
               </div>
@@ -155,7 +218,12 @@ export default function SignUp() {
               <div className=''>
                 <label className=' font-semibold text-[#687a72]'>
                   Password
-                </label>
+                </label>{" "}
+                <br />
+                <span className=' text-red-500 text-sm'>
+                  {" "}
+                  {errors.password?.message}
+                </span>
                 <div
                   className=' w-full mt-1.5 border border-[#3e5a4e] flex 
               gap-3 items-center p-2 py-2.5  shadow rounded-lg'>
@@ -172,7 +240,7 @@ export default function SignUp() {
           focus:outline-none'
                     placeholder='Password'
                     id='password'
-                    onChange={handleChange}
+                    {...register("password")}
                   />
                 </div>
               </div>
