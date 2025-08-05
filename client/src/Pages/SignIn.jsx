@@ -107,12 +107,19 @@ export default function SignIn() {
   // };
 
   return (
-    <div className='h-[100vh]'>
+    <div className='h-[100vh] bg-[#fefcff]  w-full relative'>
+      <div
+        class='absolute inset-0 -z-0 desi'
+        style={{
+          backgroundImage: `radial-gradient(circle at 30% 70%,  rgba(230, 221, 173) transparent 60% ),
+          radial-gradient(circle at 70% 30%, rgba(250, 182, 193) transparent 60%)`,
+        }}
+      />
       <div
         className='flex max-w-[25rem] justify-center
-         h-full flex-col mx-auto
+         h-full flex-col mx-auto 
        '>
-        <div className=' bg-white py-10 px-5 sm:px-0 rounded-xl shadow-md '>
+        <div className=' bg-white z-[1000] py-10 px-5 sm:px-0 rounded-xl shadow-md '>
           <div className=' '>
             <h3 className='text-center sm:text-3xl mb-[1.25rem] text-2xl font-bold'>
               Login Page
