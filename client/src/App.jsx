@@ -20,10 +20,22 @@ import { AnimatePresence } from "framer-motion";
 import Pay from "./Pages/Pay";
 import PrivateRoute from "./compponents/PrivateRoute";
 import GenerateReceipt from "./Pages/GenerateReceipt";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <>
+      <ToastContainer
+        position='top-right'
+        autoClose={5000} // 5 seconds
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnHover={true}
+        draggable={true}
+        pauseOnFocusLoss
+      />
       <AnimatePresence>
         <BrowserRouter>
           <Routes>
@@ -38,6 +50,7 @@ function App() {
               path='/generate_receipt/:reference'
               element={<GenerateReceipt />}
             />
+            {/* <Route path='*' element={<PageNotFound />} /> */}
             {/* <Route
               path='/generate-payment-details'
               element={<GeneratePaymentDetails />}
@@ -50,7 +63,7 @@ function App() {
               path='/verify-success/:reference'
               element={<UploadSuccessful />}
             />
-            <Route path='/download' element={<Download />} />
+            {/* <Route path='/download' element={<Download />} /> */}
             {/* <Route path='/register' element={<CreateAccount />} /> */}
 
             {/* Private Routes */}

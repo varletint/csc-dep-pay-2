@@ -5,6 +5,7 @@ import RecentTransactions from "./Dashboard/RecentTransactions";
 import Paystack from "@paystack/inline-js";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 import img1 from "../assets/images/ibbul-img.webp";
 
@@ -54,7 +55,8 @@ export default function DashProfile() {
         userName: currentUser.name,
       },
       callback: async function (response) {
-        alert("Payment complete! Reference: " + response.reference);
+        toast.success("Payment complete! Reference: " + response.reference);
+        // alert("Payment complete! Reference: " + response.reference);
       },
       onSuccess: (transaction) => {
         console.log(transaction);
