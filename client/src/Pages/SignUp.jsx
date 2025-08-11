@@ -55,6 +55,8 @@ export default function SignUp() {
   }
 
   const onSubmit = async (formData) => {
+    formData.matricNumber = formData.matricNumber.toLowerCase().trim();
+    formData.name = formData.name.toLowerCase().trim();
     try {
       setIsLoading(true);
       dispatch(signInStart());
@@ -64,6 +66,7 @@ export default function SignUp() {
         headers: {
           "Content-Type": "application/json",
         },
+
         body: JSON.stringify(formData),
       });
       const data = await res.json();

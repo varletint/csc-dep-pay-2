@@ -36,6 +36,8 @@ export default function SignIn() {
   document.title = "Login page";
 
   const onSubmit = async (formData) => {
+    formData.matricNumber = formData.matricNumber.toLowerCase().trim();
+
     try {
       setIsLoading(true);
       dispatch(signInStart());
