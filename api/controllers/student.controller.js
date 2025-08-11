@@ -1,18 +1,37 @@
-import Student from "../models/student.modal.js";
-import { errorHandler } from "../utils/errorHandler.js";
+import UserTwo from "../models/user.model.js";
 
-export const createStudent = async (req, res, next) => {
+export const getStudents = async (req, res, next) => {
+  // if (!req.role === "admin") {
+  //   return next(errorHandler(403, "Your are not allowed to see any Student"));
+  // }
   try {
-    const { reference, matric_no, fullname, itemId } = req.body;
+    const startIndex = parseInt(req.query.startIndex) || 0;
+    const limit = parseInt(req.query.limit) || 50;
+    const sortDirection = req.query.sort === "asc" ? 1 : -1;
 
-    const newStudent = new Student({
-      reference,
-      matric_no,
-      fullname,
-      item,
+    const users = await UserTwo.find()
+      .sort({ createdAt: sortDirection })
+      .skip(startIndex)
+      .limit(limit);
+
+    const totalUsers = await UserTwo.countDocuments();
+
+    const now = new Date();
+
+    const oneMonthAgo = new Date(
+      now.getFullYear(),
+      now.getMonth() - 1,
+      now.getDate()
+    );
+    const lastMonthUsers = await UserTwo.countDocuments({
+      createdAt: { $gte: oneMonthAgo },
     });
-    await newStudent.save();
-    res.status(200).json(newStudent);
+
+    const userWithOutPassword = users.map((user) => {
+      const { password, ...rest } = user._doc;
+      return rest;
+    });
+    res.status(200).json({ userWithOutPassword, totalUsers, lastMonthUsers });
   } catch (error) {
     next(error);
   }

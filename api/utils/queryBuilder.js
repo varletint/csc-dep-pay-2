@@ -28,3 +28,10 @@ export const buildItemQuery = (queryParams) => {
 
   return filters;
 };
+
+// export const studentsQueryBuilder = (queryParams) => {
+//   const filters = [];
+//   if (queryParams.userId) filters.userId = queryParams.userId;
+//   if (queryParams.matricNumber) filters.matricNumber = queryParams.matricNumber;
+//   if (queryParams.userId) filters.userId = queryParams.userId;
+// };

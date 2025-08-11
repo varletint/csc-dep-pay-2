@@ -55,11 +55,12 @@ export default function SignUp() {
   }
 
   const onSubmit = async (formData) => {
-    formData.matricNumber = formData.matricNumber.toLowerCase().trim();
-    formData.name = formData.name.toLowerCase().trim();
     try {
       setIsLoading(true);
       dispatch(signInStart());
+
+      formData.matricNumber = formData.matricNumber.toLowerCase().trim();
+      formData.name = formData.name.toLowerCase().trim();
 
       const res = await fetch(`/api/auth/signup`, {
         method: "POST",
@@ -161,7 +162,7 @@ export default function SignUp() {
                     // value={formData.email}
                     className='w-full text-[#a1998a] border-none bg-transparent 
             placeholder:text-[#a1998a] placeholder:font-medium
-          focus:outline-none uppercase placeholder:capitalize font-semibold '
+          focus:outline-none placeholder:capitalize font-semibold '
                     placeholder='Matric Number'
                     {...register("matricNumber")}
                   />

@@ -36,11 +36,10 @@ export default function SignIn() {
   document.title = "Login page";
 
   const onSubmit = async (formData) => {
-    formData.matricNumber = formData.matricNumber.toLowerCase().trim();
-
     try {
       setIsLoading(true);
       dispatch(signInStart());
+      formData.matricNumber = formData.matricNumber.toLowerCase().trim();
 
       const res = await fetch(`/api/auth/signin`, {
         method: "POST",

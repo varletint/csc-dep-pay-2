@@ -10,6 +10,7 @@ import cors from "cors";
 import itemRoutes from "./routes/item.route.js";
 import authRoutes from "./routes/auth.route.js";
 import webhooRoute from "./routes/webhook.route.js";
+import studentsRoute from "./routes/student.route.js";
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.listen(3000, () => {
 app.use("/api/item", itemRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/webhook", webhooRoute);
+app.use("/api/students", studentsRoute);
 
 const __dirname = path.resolve();
 
