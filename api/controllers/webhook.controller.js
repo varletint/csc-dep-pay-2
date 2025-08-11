@@ -69,3 +69,37 @@ export const updateWebhook = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getTransactions = async (req, res, next) => {
+  try {
+    const startIndex = parseInt(req.query.startIndex) || 0;
+    const limit = parseInt(req.query.limit) || 50;
+    const sortDirection = req.query.sort === "asc" ? 1 : -1;
+
+    const payments = await Payment.find()
+      .sort({ createdAt: sortDirection })
+      .skip(startIndex)
+      .limit(limit);
+
+    const totalPayments = await Payment.countDocuments();
+
+    const now = new Date();
+
+    const oneMonthAgo = new Date(
+      now.getFullYear(),
+      now.getMonth() - 1,
+      now.getDate()
+    );
+    const lastMonthPayments = await Payment.countDocuments({
+      createdAt: { $gte: oneMonthAgo },
+    });
+
+    // const userWithOutPassword = users.map((user) => {
+    //   const { password, ...rest } = user._doc;
+    //   return rest;
+    // });
+    res.status(200).json({ payments, totalPayments, lastMonthPayments });
+  } catch (error) {
+    next(error);
+  }
+};

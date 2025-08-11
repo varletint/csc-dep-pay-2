@@ -1,9 +1,9 @@
 import UserTwo from "../models/user.model.js";
 
 export const getStudents = async (req, res, next) => {
-  // if (!req.role === "admin") {
-  //   return next(errorHandler(403, "Your are not allowed to see any Student"));
-  // }
+  if (!req.role === "admin") {
+    return next(errorHandler(403, "Your are not allowed to see any Student"));
+  }
   try {
     const startIndex = parseInt(req.query.startIndex) || 0;
     const limit = parseInt(req.query.limit) || 50;
