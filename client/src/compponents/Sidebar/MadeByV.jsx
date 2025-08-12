@@ -1,8 +1,13 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
-import { HiOutlineExclamationCircle } from "react-icons/hi";
+import {
+  HiLogout,
+  HiOutlineExclamationCircle,
+  HiOutlineLogout,
+} from "react-icons/hi";
 import { signoutSuccess } from "../../redux/user/userSlice";
 import { useDispatch } from "react-redux";
+import { FaDoorClosed } from "react-icons/fa";
 
 export default function MadeByV() {
   const [showModal, setShowModal] = useState(false);
@@ -27,14 +32,22 @@ export default function MadeByV() {
   return (
     <div
       className=' text-xs
-  text-[#084d2c] py-2 px-2 sticky justify-end sm:m mt-5
-  top-[calc(100vh_-_48px_-_16px)]  border-[#c7e9d9] z-[-1]
+  text-[#7a998a] py-2 px-2 sticky justify-end sm:m mt-5
+  top-[calc(100vh_-_48px_-_16px)]  border-[#c7e9d9] z-[1022]
   md:border-none border-'>
       <div className='flex items-center justify-between '>
         <div className='flex flex-col items-start '>
-          <button onClick={() => setShowModal(true)}>Log out</button>
-          <p className=' font-bold'>varletint</p>
-          <p className='text-xs text-[#8aa197] z-0 '>junior web.dev</p>
+          <button
+            onClick={() => setShowModal(true)}
+            className=' 
+          text-sm flex items-center gap-2'>
+            <span>
+              <HiOutlineLogout size={20} />
+            </span>
+            Log out
+          </button>
+          {/* <p className=' font-bold'>varletint</p>
+          <p className='text-xs text-[#8aa197] z-0 '>junior web.dev</p> */}
         </div>
       </div>
       <div

@@ -23,9 +23,9 @@ export default function Home() {
   // const { currentUser } = useSelector((state) => state.user);
   return (
     <div
-      // className='sm:grid gap-4 p- lg:grid-cols-[250px,_1fr]
-      // sm:grid-cols-[200px,_1fr] flex flex-col
-      // '
+      className='grid gap-4 p- lg:grid-cols-[250px,_1fr]
+      sm:grid-cols-[200px,_1fr] 
+      '
       initial={{ width: 0 }}
       animate={{ width: "" }}
       transition={{ duration: 0.2 }}

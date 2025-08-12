@@ -112,3 +112,43 @@ option {
       transparent 60%
     );
 }
+
+/* hambuger click */
+
+.hamburger {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px; /*Hidden by default */
+  width: 250px;
+  height: 100%;
+  background-color: #f1f7f3;
+  color: white;
+  padding: 10px 8px;
+
+  transition: left 0.3s ease-in-out;
+}
+
+.sidebar.open {
+  left: 0; /* Slide in */
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin: 15px 0;
+  cursor: pointer;
+}
