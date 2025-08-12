@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 
-export default function DashPaidStudents() {
+export default function DashStudentTransactions() {
   const { currentUser } = useSelector((state) => state.user);
   const [userPurchasedItems, setUserPurchasedItems] = useState([]);
-  const [totalStudents, setTotlStudents] = useState(null);
+  const [searchParam] = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
-  console.log(userPurchasedItems);
+
   useEffect(() => {
-    document.title = "Dashboard";
+    document.title = "Transactions | Dashboard";
     const fetchUserItems = async () => {
       setIsLoading(true);
-      const res = await fetch(`/api/students/get-students`);
+      const userId = searchParam.get("userId");
+      const res = await fetch(`/api/item/purchased-items/${userId}`);
       const data = await res.json();
       if (!res.ok) {
         setIsLoading(false);
@@ -20,8 +21,7 @@ export default function DashPaidStudents() {
         return;
       }
       setIsLoading(false);
-      setUserPurchasedItems(data.userWithOutPassword);
-      setTotlStudents(data.totalUsers);
+      setUserPurchasedItems(data);
     };
     fetchUserItems();
   }, []);
@@ -33,7 +33,7 @@ export default function DashPaidStudents() {
     );
 
   return (
-    <div className='bg-white  pt-4 min-h-[100vh] shadow '>
+    <div className='bg-white rounded-lg pt-4 min-h-[100vh] shadow '>
       <div className=' gap-3 px-4 grid'>
         {/* <RecentTransactions /> */}
 
@@ -45,7 +45,7 @@ export default function DashPaidStudents() {
             <h3
               className='flex items-center gap-1.5
          font-medium'>
-              Students List ({totalStudents})
+              Recent Transactions
             </h3>
             <button
               className='text-sm text-green-500
@@ -68,14 +68,14 @@ export default function DashPaidStudents() {
                     <TableRow
                       key={item._id}
                       matric={item.matricNumber}
-                      item={item.name}
-                      link={`/dashboard?tab=student_tranx&userId=${item._id}`}
-                      // amount={new Intl.NumberFormat("en-NG", {
-                      //   style: "currency",
-                      //   currency: "NGN",
-                      //   minimumFractionDigits: 0,
-                      //   maximumFractionDigits: 0,
-                      // }).format(item.amount)}
+                      item={item.itemName}
+                      link={`/generate_receipt/${item.reference}`}
+                      amount={new Intl.NumberFormat("en-NG", {
+                        style: "currency",
+                        currency: "NGN",
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                      }).format(item.amount)}
                       date={new Date(item.createdAt).toLocaleDateString()}
                     />
                   ) : (
@@ -97,9 +97,9 @@ const TableHead = () => {
     <thead>
       <tr className=' text-xs font-normal bg-gray-100 text-stone-500'>
         <th className='text-start p-1.5 '>Matric number</th>
-        <th className='text-start p-1.5 '>Fullname</th>
+        <th className='text-start p-1.5 '>Item</th>
         <th className='text-start p-1.5'>Date</th>
-        {/* <th className='text-start p-1.5'>Amount</th> */}
+        <th className='text-start p-1.5'>Amount</th>
         {/* <th className='text-start p-1.5 '>Category</th> */}
         <th className='w-8'></th>
       </tr>
@@ -117,7 +117,7 @@ const TableRow = ({ matric, category, date, amount, item, link }) => {
       <td className='p-1.5'>{amount}</td>
       <td className='p-1.5'>
         <Link to={link} className=' underline text-blue-500'>
-          View
+          Receipt
         </Link>
       </td>
     </tr>

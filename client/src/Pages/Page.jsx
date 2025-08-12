@@ -7,6 +7,7 @@ import { useLocation } from "react-router-dom";
 import DashTransactions from "../compponents/DashTransactions";
 import DashPaidStudents from "../compponents/DashPaidStudents";
 import DashProfile from "../compponents/DashProfile";
+import DashStudentTransactions from "../compponents/DashStudentTransactions";
 export default function Home() {
   const [tab, setTab] = useState("");
   const location = useLocation();
@@ -22,9 +23,9 @@ export default function Home() {
   // const { currentUser } = useSelector((state) => state.user);
   return (
     <div
-      className='grid gap-4 p- lg:grid-cols-[250px,_1fr]
-      sm:grid-cols-[200px,_1fr]
-      '
+      // className='sm:grid gap-4 p- lg:grid-cols-[250px,_1fr]
+      // sm:grid-cols-[200px,_1fr] flex flex-col
+      // '
       initial={{ width: 0 }}
       animate={{ width: "" }}
       transition={{ duration: 0.2 }}
@@ -33,12 +34,15 @@ export default function Home() {
       // animate={{ height: 1, opacity: 1 }}
       // transition={ { duration: 6 } }
     >
+      {/* <div className=''> */}
       <Sidebar />
+      {/* </div> */}
       <div className=''>
         {tab === "overview" && <Dashboard />}
         {tab === "transactions" && <DashTransactions />}
         {tab === "paid-students" && <DashPaidStudents />}
         {tab === "profile" && <DashProfile />}
+        {tab === "student_tranx" && <DashStudentTransactions />}
       </div>
     </div>
   );
