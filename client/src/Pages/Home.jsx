@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import {
   HiArrowRight,
   HiCash,
@@ -375,10 +376,11 @@ const PriceCard = ({
   slug,
 }) => {
   return (
-    <div
+    <motion.div
       className=' bg-[#ffffff65] border border-[#0f380211] h-[380px] w-[280px] 
     rounded-3xl shadow-md py-7 px-5 flex-shrink-0
-    '>
+    '
+      drag='x'>
       <div className=''>
         <div className=''>
           <h1 className=' font-semibold text-xl w-[140px] leading-6'>
@@ -426,7 +428,7 @@ const PriceCard = ({
           </ul>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

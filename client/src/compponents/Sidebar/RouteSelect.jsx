@@ -69,24 +69,15 @@ export default function RouteSelect() {
             </div>
           </>
         )}
-        {/* <Route Icon={<FaReceipt />} title='Payments' /> */}
         <Route
           title='Transactions'
           Icon={<FaCashRegister />}
           selected={tab === "transactions" ? true : false}
           to='/dashboard?tab=transactions'
         />
-        {/* <Link to={"/create-item"}> */}
-
-        {/* </Link> */}
       </div>
       <AnimatePresence initial={false}>
         {isOpen ? (
-          //   <motion.div
-          //     initial={{ opacity: 0, scale: 0 }}
-          //     animate={{ opacity: 1, scale: 1 }}
-          //     exit={{ opacity: 0, scale: 0 }}>
-
           <div
             className='fixed left-[50%] top-1/2   inset- 
    z-[1000] ]
@@ -97,28 +88,10 @@ export default function RouteSelect() {
           '
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0 }}
-
-              // initial={{ opacity: 0, height: 0, width: 0 }}
-              // animate={{
-              //   opacity: 1,
-              //   height: "",
-              //   width: "",
-              //   transition: { duration: 0.2 },
-              // }}
-              // exit={{
-              //   height: 0,
-              //   transition: { duration: 0.2 },
-              // }}
-            >
+              exit={{ opacity: 0, scale: 0 }}>
               <div
                 className='  py-3 flex justify-end
             '>
-                {/* <FaTimes
-                  size={25}
-                  className=''
-                  onClick={() => setIsOpen(false)}
-                /> */}
                 <button
                   className=' flex flex-col justify-center items-center
                 space-y-1 px-2'
@@ -132,12 +105,9 @@ export default function RouteSelect() {
                 </button>
               </div>
               <CreateItem close />
-
-              {/* <PaymentModal></PaymentModal> */}
             </motion.div>
           </div>
-        ) : // {/* </motion.div>
-        null}
+        ) : null}
       </AnimatePresence>
 
       {isOpen && (

@@ -35,8 +35,6 @@ export default function DashPaidStudents() {
   return (
     <div className='bg-white  pt-4 min-h-[100vh] shadow '>
       <div className=' gap-3 px-4 grid'>
-        {/* <RecentTransactions /> */}
-
         <div
           className='grid-cols-1 p-4 border 
   shadow-sm rounded-xl lg:overflow-hidden overflow-x-scroll scrollbar
@@ -64,18 +62,11 @@ export default function DashPaidStudents() {
               {userPurchasedItems.length > 0 &&
                 userPurchasedItems.map((item) =>
                   item ? (
-                    // <option key={item._id}>{item.itemName}</option>
                     <TableRow
                       key={item._id}
                       matric={item.matricNumber}
                       item={item.name}
                       link={`/dashboard?tab=student_tranx&userId=${item._id}`}
-                      // amount={new Intl.NumberFormat("en-NG", {
-                      //   style: "currency",
-                      //   currency: "NGN",
-                      //   minimumFractionDigits: 0,
-                      //   maximumFractionDigits: 0,
-                      // }).format(item.amount)}
                       date={new Date(item.createdAt).toLocaleDateString()}
                     />
                   ) : (
@@ -99,8 +90,6 @@ const TableHead = () => {
         <th className='text-start p-1.5 '>Matric number</th>
         <th className='text-start p-1.5 '>Fullname</th>
         <th className='text-start p-1.5'>Date</th>
-        {/* <th className='text-start p-1.5'>Amount</th> */}
-        {/* <th className='text-start p-1.5 '>Category</th> */}
         <th className='w-8'></th>
       </tr>
     </thead>
@@ -112,7 +101,6 @@ const TableRow = ({ matric, category, date, amount, item, link }) => {
     <tr className='text-[0.73rem] font-medium text-stone-700'>
       <td className='p-1.5 uppercase whitespace-nowrap'>{matric}</td>
       <td className='p-1.5 capitalize whitespace-nowrap'>{item}</td>
-      {/* <td className='p-1.5 capitalize whitespace-nowrap'>{category}</td> */}
       <td className='p-1.5 whitespace-nowrap'>{date}</td>
       <td className='p-1.5'>{amount}</td>
       <td className='p-1.5'>

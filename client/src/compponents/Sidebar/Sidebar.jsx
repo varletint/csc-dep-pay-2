@@ -36,7 +36,6 @@ export default function Sidebar({}) {
         
         `}>
         <ul className='mt-[1.6rem] '>
-          {/* <AccountToggle onClick={toggleSidebar} /> */}
           <span>
             <div className=' text-right mb-10 '>
               <button className='px-5'>

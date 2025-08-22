@@ -42,12 +42,10 @@ export default function MadeByV() {
             className=' 
           text-sm flex items-center gap-2'>
             <span>
-              <HiOutlineLogout size={20} />
+              <HiOutlineLogout size={20} className='text-red-500' />
             </span>
             Log out
           </button>
-          {/* <p className=' font-bold'>varletint</p>
-          <p className='text-xs text-[#8aa197] z-0 '>junior web.dev</p> */}
         </div>
       </div>
       <div
