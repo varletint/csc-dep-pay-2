@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useMotionValueEvent,
+  useTransform,
+} from "framer-motion";
 import {
   HiArrowRight,
   HiCash,
@@ -318,9 +323,11 @@ const PriceSection = () => {
         </h1>
       </div>
       <div
-        className='flex 
-      items-center lg:justify-center justify-between
-  gap-[2rem] mt-16  py-3 px-2 overflow-auto lg:gap-[5rem]'>
+        className='flex
+            items-center lg:justify-center justify-between
+        gap-[2rem] mt-16  py-3 px-2 overflow-auto lg:gap-[5rem]'
+        // className='grid place-items-center'
+      >
         <PriceCard
           billName={"Project Manual"}
           billPrice={"4,100"}
@@ -375,12 +382,32 @@ const PriceCard = ({
   perPay,
   slug,
 }) => {
+  const x = useMotionValue(0);
+
+  const opacity = useTransform(x, [-150, 0, 150], [0, 1, 0]);
+  const rotate = useTransform(x, [-50, 50], [-18, 18]);
+
+  useEffect(() => {
+    console.log(x);
+  }, [x]);
   return (
     <motion.div
-      className=' bg-[#ffffff65] border border-[#0f380211] h-[380px] w-[280px] 
-    rounded-3xl shadow-md py-7 px-5 flex-shrink-0
+      className=' bg-[#ffffff] border border-[#0f380211] h-[380px] w-[280px] 
+    rounded-3xl shadow-md py-7 px-5 flex-shrink-0 hover:cursor-grab active:cursor-grabbing 
     '
-      drag='x'>
+      style={{
+        gridRow: 1,
+        gridColumn: 1,
+        x,
+        opacity,
+        rotate,
+      }}
+      // drag='x'
+      // dragConstraints={{
+      //   left: 0,
+      //   right: 0,
+      // } }
+    >
       <div className=''>
         <div className=''>
           <h1 className=' font-semibold text-xl w-[140px] leading-6'>
