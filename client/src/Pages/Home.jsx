@@ -315,53 +315,57 @@ const PriceSection = () => {
   return (
     <section
       className='bg-[#d5e0db33] [#e7f1ecdc] mt-10 h-[700px] flex
-    flex-col justify-center px-16 '
+    flex-col justify-center items-center px-16 '
       id='prices'>
       <div className=''>
         <h1 className=' text-[2rem] text-center font-semibold'>
           Price that works for you
         </h1>
       </div>
-      <div
-        className='flex
-            items-center lg:justify-center justify-between
-        gap-[2rem] mt-16  py-3 px-2 overflow-auto lg:gap-[5rem]'
-        // className='grid place-items-center'
-      >
-        <PriceCard
-          billName={"Project Manual"}
-          billPrice={"4,100"}
-          slug={"4100"}
-          billDes={"Get your Project Manual Book with zero-hassle"}
-          benefit1={"Project Manual"}
-          icon1={<HiOutlineCheckCircle />}
-          perPay='/Per student/ Per book'
-        />
-        <PriceCard
-          billName={"Field Trip Card"}
-          billDes={"Pay for your Field Trip at your finger tips"}
-          billPrice={"30,200"}
-          slug={"30200"}
-          benefit1={"Field Trip"}
-          icon1={<HiOutlineCheckCircle />}
-          perPay={"/Per student"}
-        />
+      <div className=' w-full flex justify-cente'>
+        <div
+          // className='flex
+          //     items-center lg:justify-center justify-between
+          // gap-[2rem] mt-16  py-3 px-2 overflow-auto crousel
+          // lg:gap-[5rem]'
+          className='crousel'
+          // className='grid place-items-center'
+        >
+          <PriceCard
+            billName={"Project Manual"}
+            billPrice={"4,100"}
+            slug={"4100"}
+            billDes={"Get your Project Manual Book with zero-hassle"}
+            benefit1={"Project Manual"}
+            icon1={<HiOutlineCheckCircle />}
+            perPay='/Per student/ Per book'
+          />
+          <PriceCard
+            billName={"Field Trip Card"}
+            billDes={"Pay for your Field Trip at your finger tips"}
+            billPrice={"30,200"}
+            slug={"30200"}
+            benefit1={"Field Trip"}
+            icon1={<HiOutlineCheckCircle />}
+            perPay={"/Per student"}
+          />
 
-        <PriceCard
-          billName={"Books and Manuals Card"}
-          billPrice={"2,100"}
-          billDes={"Perfect for paying Practical Manual and Books"}
-          benefit1={"Manual for CSC 201"}
-          benefit2={"Manual for CSC 204"}
-          benefit3={"Manual for CSC 301"}
-          benefit4={"Manual for CSC 104"}
-          icon1={<HiOutlineCheckCircle />}
-          icon2={<HiOutlineCheckCircle />}
-          icon3={<HiOutlineCheckCircle />}
-          icon4={<HiOutlineCheckCircle />}
-          perPay={"/Per student/ Per book"}
-          slug={"2100"}
-        />
+          <PriceCard
+            billName={"Books and Manuals Card"}
+            billPrice={"2,100"}
+            billDes={"Perfect for paying Practical Manual and Books"}
+            benefit1={"Manual for CSC 201"}
+            benefit2={"Manual for CSC 204"}
+            benefit3={"Manual for CSC 301"}
+            benefit4={"Manual for CSC 104"}
+            icon1={<HiOutlineCheckCircle />}
+            icon2={<HiOutlineCheckCircle />}
+            icon3={<HiOutlineCheckCircle />}
+            icon4={<HiOutlineCheckCircle />}
+            perPay={"/Per student/ Per book"}
+            slug={"2100"}
+          />
+        </div>
       </div>
     </section>
   );
@@ -391,17 +395,17 @@ const PriceCard = ({
     console.log(x);
   }, [x]);
   return (
-    <motion.div
+    <div
       className=' bg-[#ffffff] border border-[#0f380211] h-[380px] w-[280px] 
     rounded-3xl shadow-md py-7 px-5 flex-shrink-0 hover:cursor-grab active:cursor-grabbing 
-    '
-      style={{
-        gridRow: 1,
-        gridColumn: 1,
-        x,
-        opacity,
-        rotate,
-      }}
+      snap-start card'
+      // style={{
+      //   gridRow: 1,
+      //   gridColumn: 1,
+      //   x,
+      //   opacity,
+      //   rotate,
+      // }}
       // drag='x'
       // dragConstraints={{
       //   left: 0,
@@ -455,7 +459,7 @@ const PriceCard = ({
           </ul>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
