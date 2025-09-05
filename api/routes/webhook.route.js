@@ -4,10 +4,12 @@ import {
   updateWebhook,
   webHook,
 } from "../controllers/webhook.controller.js";
+import { verifyAdmin } from "../utils/verifyAdmin.js";
+import { verifyUserToken } from "../utils/verifyUser.js";
 const router = express.Router();
 
 router.post("/paystack", webHook);
 router.put("/update-paystack/:referecnce", updateWebhook);
-router.get("/all_transactions", getTransactions);
+router.get("/all_transactions", verifyAdmin, getTransactions);
 
 export default router;
