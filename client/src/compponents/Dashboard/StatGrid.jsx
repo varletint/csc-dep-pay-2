@@ -10,7 +10,7 @@ export default function StatGrid() {
         const response = await fetch(`api/webhook/all_transactions`);
         const data = await response.json();
         setTransactions(data);
-        const total = transactions.payments.reduce(
+        const total = data.payments.reduce(
           (acc, transaction) => acc + transaction.amount,
           0
         );
