@@ -32,6 +32,11 @@ export default function DashProfile() {
           toast.error(data.message);
           return navigate("/login");
         }
+        if (!res.ok) {
+          setIsLoading(false);
+          toast.error(data.message);
+          return navigate("/login");
+        }
         setIsLoading(false);
         setItems(data.items);
       } catch (error) {
