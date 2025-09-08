@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function StatGrid() {
   const [transactions, setTransactions] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchAllTranstionsAmount = async () => {
       try {
         const response = await fetch(`api/webhook/all_transactions`);
+        if (response.status === 401 || response.status === 403) {
+          toast.error(response.message || "Unauthorized! Please login");
+          navigate("/login");
+          return;
+        }
         const data = await response.json();
         setTransactions(data);
         const total = data.payments.reduce(
@@ -31,17 +40,17 @@ export default function StatGrid() {
             currency: "NGN",
             minimumFractionDigits: 0,
             maximumFractionDigits: 0,
-          }).format(totalAmount) || "NaN"
+          }).format(totalAmount) || "loading..."
         }
       />
       <Card
         title={"Number of payers"}
         period={"Last 30 days"}
-        value={transactions.lastMonthPayments}
+        value={transactions.lastMonthPayments || "loading..."}
       />
       <Card
         title={"Total number of transactions"}
-        value={transactions.totalPayments || "NaN"}
+        value={transactions.totalPayments || "loading..."}
       />
     </>
   );

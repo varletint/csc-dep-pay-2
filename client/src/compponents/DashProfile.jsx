@@ -6,6 +6,7 @@ import Paystack from "@paystack/inline-js";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 import img1 from "../assets/images/ibbul-img.webp";
 
@@ -16,6 +17,8 @@ export default function DashProfile() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     document.title = "Profile - Dashboard ";
     const fetchItems = async () => {
@@ -24,9 +27,10 @@ export default function DashProfile() {
         const res = await fetch("/api/item/get-items");
         const data = await res.json();
 
-        if (!res.ok) {
+        if (res.status === 401 || res.status === 403) {
           setIsLoading(false);
-          return alert(data.message);
+          toast.error(data.message);
+          return navigate("/login");
         }
         setIsLoading(false);
         setItems(data.items);
@@ -68,7 +72,7 @@ export default function DashProfile() {
         console.log("onCancel");
       },
       onError: (error) => {
-        console.log("Error: ", error.message);
+        toast.error("Error: ", error.message);
       },
     });
   };

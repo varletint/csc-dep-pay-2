@@ -11,17 +11,23 @@ export const verifyAdmin = (req, res, next) => {
 
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
     if (err)
-      return res.status(403).render("errorPage", {
-        title: "Unauthorized",
-        message: "Your session has expired or the token is invalid.",
-        redirectUrl: "/login",
-      });
+      // return res.status(403).render("errorPage", {
+      //   title: "Unauthorized",
+      //   message: "Your session has expired or the token is invalid.",
+      //   redirectUrl: "/login",
+      // });
+      return next(
+        errorHandler(403, "Your session has expired or the token is invalid.")
+      );
+
     if (user.role !== "admin") {
-      return res.status(403).render("errorPage", {
-        title: "Unauthorized",
-        message: "Access denied. Admins only.",
-        redirectUrl: "/login",
-      });
+      return next(errorHandler(403, "Admins only."));
+
+      // return res.status(403).render("errorPage", {
+      //   title: "Unauthorized",
+      //   message: "Access denied. Admins only.",
+      //   redirectUrl: "/login",
+      // });
     }
 
     req.user = user; // store user info for later use

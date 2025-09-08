@@ -3,6 +3,7 @@ import Payment from "../models/payment.model.js";
 import User from "../models/user.model.js";
 import Item from "../models/item.modal.js";
 import crypto from "crypto";
+import { paymentQueryBuilder } from "../utils/queryBuider/webhookQuery.js";
 
 export const webHook = async (req, res, next) => {
   const hash = crypto
@@ -75,7 +76,6 @@ export const getTransactions = async (req, res, next) => {
     const startIndex = parseInt(req.query.startIndex) || 0;
     const limit = parseInt(req.query.limit) || 50;
     const sortDirection = req.query.sort === "asc" ? 1 : -1;
-
     const payments = await Payment.find()
       .sort({ createdAt: sortDirection })
       .skip(startIndex)
@@ -99,6 +99,29 @@ export const getTransactions = async (req, res, next) => {
     //   return rest;
     // });
     res.status(200).json({ payments, totalPayments, lastMonthPayments });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getQuerySearch = async (req, res, next) => {
+  try {
+    const startIndex = parseInt(req.query.startIndex) || 0;
+    const limit = parseInt(req.query.limit) || 20;
+    const sortDirection = req.query.sort === "asc" ? 1 : -1;
+
+    const filters = paymentQueryBuilder(req.query);
+    const searchedQueries = await Payment.find(filters)
+      .sort({ updatedAt: sortDirection })
+      .skip(startIndex)
+      .limit(limit);
+
+    const totalSearchedQueries = await Payment.countDocuments(filters);
+
+    res.status(200).json({
+      searchedQueries,
+      totalSearchedQueries,
+    });
   } catch (error) {
     next(error);
   }
