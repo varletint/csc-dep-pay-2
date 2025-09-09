@@ -8,7 +8,8 @@ export const paymentQueryBuilder = (queryParams) => {
   if (queryParams.searchTerm) {
     filters.$or = [
       { itemName: { $regex: queryParams.searchTerm, $options: "i" } },
-      { priceTag: { $regex: queryParams.searchTerm, $options: "i" } },
+      { matricNumber: { $regex: queryParams.searchTerm, $options: "i" } },
+      { reference: { $regex: queryParams.searchTerm, $options: "i" } },
     ];
   }
 
