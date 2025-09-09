@@ -2,6 +2,7 @@ import { set } from "mongoose";
 import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function SearchInput() {
   const [searchData, setSearchData] = useState("");
@@ -19,6 +20,9 @@ export default function SearchInput() {
     e.preventDefault();
 
     const urlParams = new URLSearchParams(location.search);
+    if (!searchData || searchData === " ") {
+      return toast.error(`search input can't be empty`);
+    }
     if (searchData) {
       urlParams.set("searchTerm", searchData);
       const searchQuery = urlParams.toString();
