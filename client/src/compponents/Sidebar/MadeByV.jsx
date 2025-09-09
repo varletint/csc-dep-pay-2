@@ -31,8 +31,8 @@ export default function MadeByV() {
   };
   return (
     <div
-      className=' text-xs
-  text-[#7a998a] py-2 px-2 sticky justify-end sm:m mt-5
+      className=' text-xs 
+  text-[#7a998a] py-2 px-2 fixed justify-end sm:m mt-5
   top-[calc(100vh_-_48px_-_16px)]  border-[#c7e9d9] z-[1022]
   md:border-none border- hover:bg-[#ddebe0] transition-[box-shadow,_background-color_color] rounded'>
       <div className='flex items-center justify-between '>

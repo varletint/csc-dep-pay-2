@@ -15,6 +15,7 @@ import GenerateReceipt from "./Pages/GenerateReceipt";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PageNotFound from "./Pages/PageNotFound";
+import SearchPage from "./Pages/SearchPage";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
             <Route element={<PrivateRoute />}>
               <Route path='/dashboard' element={<Page />} />
               <Route path='/create-item' element={<CreateItem />} />
+              <Route path='/search' element={<SearchPage />} />
             </Route>
           </Routes>
         </BrowserRouter>
