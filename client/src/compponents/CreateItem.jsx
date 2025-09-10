@@ -101,21 +101,22 @@ export default function CreateItem({}) {
     <div className=' flex flex-col z-[101]'>
       <h1
         className='text-center text-2xl font-medium
-      sm:text-3xl sm:font-semibold text-[#04663b] '>
+      sm:text-3xl sm:font-semibold -mt-[rem] text-[#04663b] '>
         Create Item
       </h1>
-      <form onSubmit={handleSubmit} className='mt-10 flex flex-col gap-5'>
+      <form onSubmit={handleSubmit} className='mt-5 flex flex-col gap-[15px]'>
         <div className=''>
           <label />
           <input
             type='text'
             name='itemName'
             id='itemName'
-            placeholder='Item Name'
+            placeholder='Item name'
             // required
             onChange={handleChange}
-            className='bg-[#ddebe0] w-full py-3 rounded-lg px-5
-            placeholder:text-[#8aa197] shadow font-medium'
+            className='bg-[#ddebe0]/0 w-full py-[10px] rounded-lg px-5
+            placeholder:text-[#8aa197] focus:outline focus:border-none border border-[#3e5a4e] outline-[#3e5a4e]
+             font-normal focus:shadow-md'
           />
         </div>
         <div className=''>
@@ -128,16 +129,16 @@ export default function CreateItem({}) {
             value={price ? formatCurrency(price) : ""}
             onChange={handlePriceChange}
             placeholder='Price of the Item'
-            className='bg-[#ddebe0] w-full py-3 rounded-lg px-5
-            placeholder:text-[#8aa197] focus:outline-none 
-            shadow font-medium'
+            className='bg-[#ddebe0]/0 w-full py-[10px] rounded-lg px-5
+            placeholder:text-[#8aa197] focus:outline focus:border-none border border-[#3e5a4e] outline-[#3e5a4e]
+             font-normal'
           />
         </div>
         <div className=''>
           <div className='category' id='category'>
             <div
-              className='different bg-[#ddebe0] w-full py-3 rounded-lg px-5
-            placeholder:text-[#8aa197] shadow font-medium'>
+              className='different bg-[#ddebe0]/0 w-full py-[10px] rounded-lg px-5
+            placeholder:text-[#8aa197] shadow font-normal focus:outline focus:border-none border border-[#3e5a4e] outline-[#3e5a4e]'>
               <select
                 id='category'
                 // required
@@ -156,7 +157,7 @@ export default function CreateItem({}) {
         <button
           type='submit'
           className='bg-[#3e5a4e]
-           font-medium text-white p-[12px] rounded-lg mt-4
+           font-medium text-white p-[10px] rounded-lg mt-4
            disabled:bg-[#3e5a4e]/80 disabled:cursor-not-allowed'
           disabled={isLoad}>
           {isLoad ? "Adding item..." : "Add item"}
