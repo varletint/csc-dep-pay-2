@@ -12,7 +12,7 @@ export default function SearchInput() {
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
-    const searchTermFromURL = searchParams.get("searchTerm") || "";
+    const searchTermFromURL = searchParams.get("searchTerm");
     if (searchTermFromURL) setSearchData(searchTermFromURL);
   }, [location.search]);
 
@@ -20,7 +20,7 @@ export default function SearchInput() {
     e.preventDefault();
 
     const urlParams = new URLSearchParams(location.search);
-    if (!searchData || searchData === " ") {
+    if (!searchData?.trim()) {
       return toast.error(`search input can't be empty`);
     }
     if (searchData) {
