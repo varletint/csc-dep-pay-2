@@ -38,7 +38,7 @@ export default function CreateItem({}) {
   };
 
   const formatCurrency = (value) => {
-    const number = Number(value.replace(/\D/g, "")); // remove non-digits
+    const number = Number(value.replace(/\D/g, ""));
     return new Intl.NumberFormat("en-NG", {
       style: "currency",
       currency: "NGN",
@@ -47,9 +47,9 @@ export default function CreateItem({}) {
     }).format(number);
   };
   const handlePriceChange = (e) => {
-    const raw = e.target.value.replace(/\D/g, ""); // only digits
+    const raw = e.target.value.replace(/\D/g, "");
     setPrice(raw);
-    setFormData({ ...formData, price: raw }); // store raw number
+    setFormData({ ...formData, price: raw });
   };
 
   const handleSubmit = async (e) => {
@@ -57,7 +57,7 @@ export default function CreateItem({}) {
 
     const { price, itemName, category } = formData;
 
-    if (!price || !itemName || !category) {
+    if (!price?.trim() || !itemName?.trim() || !category?.trim()) {
       setLoadErrorMessage("All field are required");
       return dispatch(addItemFailure("All fields are required"));
     }
@@ -104,7 +104,9 @@ export default function CreateItem({}) {
       sm:text-3xl sm:font-semibold -mt-[rem] text-[#04663b] '>
         Create Item
       </h1>
-      <form onSubmit={handleSubmit} className='mt-5 flex flex-col gap-[15px]'>
+      <form
+        onSubmit={handleSubmit}
+        className='mt-5 text-[#333] flex flex-col gap-[15px]'>
         <div className=''>
           <label />
           <input
@@ -114,7 +116,7 @@ export default function CreateItem({}) {
             placeholder='Item name'
             // required
             onChange={handleChange}
-            className='bg-[#ddebe0]/0 w-full py-[10px] rounded-lg px-5
+            className=' w-full py-[10px] rounded-lg px-5
             placeholder:text-[#8aa197] focus:outline focus:border-none border border-[#3e5a4e] outline-[#3e5a4e]
              font-normal focus:shadow-md'
           />
